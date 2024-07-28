@@ -1,76 +1,90 @@
 package com.epone.application.views;
 
-import com.epone.application.views.about.AboutView;
-import com.epone.application.views.helloworld.HelloWorldView;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.orderedlayout.Scroller;
-import com.vaadin.flow.component.sidenav.SideNav;
-import com.vaadin.flow.component.sidenav.SideNavItem;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.theme.lumo.LumoUtility;
-import org.vaadin.lineawesome.LineAwesomeIcon;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 /**
  * The main view is a top-level placeholder for other views.
  */
 public class MainLayout extends AppLayout {
 
-    private H1 viewTitle;
-
     public MainLayout() {
-        setPrimarySection(Section.DRAWER);
-        addDrawerContent();
-        addHeaderContent();
+        H1 title = new H1("EP One Manpower Pte Ltd");
+        title.getStyle().set("font-size", "var(--lumo-font-size-l)")
+                .set("position", "relative");
+
+        Image sCompanyLogo = new Image("images/small-logo.png", "sCompanyLogo");
+        sCompanyLogo.setMaxWidth("50px");
+        sCompanyLogo.getStyle().set("left","60px").set("position", "relative");
+
+        VerticalLayout titleWithLogo = new VerticalLayout();
+        titleWithLogo.add(title,sCompanyLogo);
+
+        HorizontalLayout navigation = new HorizontalLayout();
+
+        navigation.getElement();
+
+        addToNavbar(titleWithLogo, navigation);
+
     }
 
-    private void addHeaderContent() {
-        DrawerToggle toggle = new DrawerToggle();
-        toggle.setAriaLabel("Menu toggle");
+    // private H1 viewTitle;
 
-        viewTitle = new H1();
-        viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
+    // public MainLayout() {
+    // setPrimarySection(Section.DRAWER);
+    // addDrawerContent();
+    // addHeaderContent();
+    // }
 
-        addToNavbar(true, toggle, viewTitle);
-    }
+    // private void addHeaderContent() {
+    // DrawerToggle toggle = new DrawerToggle();
+    // toggle.setAriaLabel("Menu toggle");
 
-    private void addDrawerContent() {
-        Span appName = new Span("My App");
-        appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD, LumoUtility.FontSize.LARGE);
-        Header header = new Header(appName);
+    // viewTitle = new H1();
+    // viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
 
-        Scroller scroller = new Scroller(createNavigation());
+    // addToNavbar(true, toggle, viewTitle);
+    // }
 
-        addToDrawer(header, scroller, createFooter());
-    }
+    // private void addDrawerContent() {
+    // Span appName = new Span("My App");
+    // appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD,
+    // LumoUtility.FontSize.LARGE);
+    // Header header = new Header(appName);
 
-    private SideNav createNavigation() {
-        SideNav nav = new SideNav();
+    // Scroller scroller = new Scroller(createNavigation());
 
-        nav.addItem(new SideNavItem("Hello World", HelloWorldView.class, LineAwesomeIcon.GLOBE_SOLID.create()));
-        nav.addItem(new SideNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create()));
+    // addToDrawer(header, scroller, createFooter());
+    // }
 
-        return nav;
-    }
+    // private SideNav createNavigation() {
+    // SideNav nav = new SideNav();
 
-    private Footer createFooter() {
-        Footer layout = new Footer();
+    // nav.addItem(new SideNavItem("Hello World", HelloWorldView.class,
+    // LineAwesomeIcon.GLOBE_SOLID.create()));
+    // nav.addItem(new SideNavItem("About", AboutView.class,
+    // LineAwesomeIcon.FILE.create()));
 
-        return layout;
-    }
+    // return nav;
+    // }
 
-    @Override
-    protected void afterNavigation() {
-        super.afterNavigation();
-        viewTitle.setText(getCurrentPageTitle());
-    }
+    // private Footer createFooter() {
+    // Footer layout = new Footer();
 
-    private String getCurrentPageTitle() {
-        PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
-        return title == null ? "" : title.value();
-    }
+    // return layout;
+    // }
+
+    // @Override
+    // protected void afterNavigation() {
+    // super.afterNavigation();
+    // viewTitle.setText(getCurrentPageTitle());
+    // }
+
+    // private String getCurrentPageTitle() {
+    // PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
+    // return title == null ? "" : title.value();
+    // }
 }
