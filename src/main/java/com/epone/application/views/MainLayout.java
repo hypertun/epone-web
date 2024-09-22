@@ -1,10 +1,13 @@
 package com.epone.application.views;
 
+import org.checkerframework.checker.units.qual.s;
+
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -12,22 +15,33 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 public class MainLayout extends AppLayout {
 
     public MainLayout() {
-        H1 title = new H1("EP One Manpower Pte Ltd");
-        title.getStyle().set("font-size", "var(--lumo-font-size-l)")
-                .set("position", "relative");
-
         Image sCompanyLogo = new Image("images/small-logo.png", "sCompanyLogo");
-        sCompanyLogo.setMaxWidth("50px");
-        sCompanyLogo.getStyle().set("left","60px").set("position", "relative");
-
-        VerticalLayout titleWithLogo = new VerticalLayout();
-        titleWithLogo.add(title,sCompanyLogo);
+        sCompanyLogo.setWidth("100px");
+        sCompanyLogo.setHeight("100px");
+        sCompanyLogo.getStyle().set("padding-right", "5%");
 
         HorizontalLayout navigation = new HorizontalLayout();
+        navigation.setWidth("100%");
+        navigation.setPadding(true);
+        navigation.setAlignItems(FlexComponent.Alignment.CENTER);
+        navigation.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
+        Button searchMaidsButton = new Button("Search Maids", e -> {
+            UI.getCurrent().getPage().setLocation("https://epone.netmaid.com.sg/searchmaid");
+        });
+
+        Button homeButton = new Button("Home");
+        homeButton.addClickListener(e -> homeButton.getUI().ifPresent(ui -> ui.navigate("home")));
+
+        Button aboutButton = new Button("About Us");
+        aboutButton.addClickListener(e -> aboutButton.getUI().ifPresent(ui -> ui.navigate("about")));
+
+        Button contactButton = new Button("Contact Us");
+
+        navigation.add(sCompanyLogo, searchMaidsButton, homeButton, aboutButton, contactButton);
         navigation.getElement();
 
-        addToNavbar(titleWithLogo, navigation);
+        addToNavbar(navigation);
 
     }
 

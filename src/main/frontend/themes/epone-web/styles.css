@@ -1,1 +1,8 @@
 @import url('./main-layout.css');
+
+vaadin-app-layout::part(navbar) {
+    border-bottom: 1px solid var(--lumo-contrast-10pct);
+    min-height: unset;
+    border-color: grey;
+    background: white;
+  }
