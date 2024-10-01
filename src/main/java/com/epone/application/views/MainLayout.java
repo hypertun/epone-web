@@ -1,10 +1,9 @@
 package com.epone.application.views;
 
-import org.checkerframework.checker.units.qual.s;
-
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -16,7 +15,7 @@ public class MainLayout extends AppLayout {
 
     public MainLayout() {
         Image sCompanyLogo = new Image("images/small-logo.png", "sCompanyLogo");
-        sCompanyLogo.setWidth("100px");
+        // sCompanyLogo.setWidth("100px");
         sCompanyLogo.setHeight("100px");
         sCompanyLogo.getStyle().set("padding-right", "5%");
 
@@ -37,68 +36,26 @@ public class MainLayout extends AppLayout {
         aboutButton.addClickListener(e -> aboutButton.getUI().ifPresent(ui -> ui.navigate("about")));
 
         Button contactButton = new Button("Contact Us");
+        contactButton.addClickListener(e -> contactButton.getUI().ifPresent(ui -> ui.navigate("contact")));
 
         navigation.add(sCompanyLogo, searchMaidsButton, homeButton, aboutButton, contactButton);
         navigation.getElement();
 
-        addToNavbar(navigation);
+        Image whatsappImage = new Image("images/WhatsAppButtonGreenSmall.png", "whatsappButton");
+        whatsappImage.setHeight("50px");
+        
+        // Construct the WhatsApp link with your desired phone number and message
+        String phoneNumber = "+6591269010"; // Replace with the actual phone number
+        String message = "Hello! I'm interested in a helper!"; // Replace with your message
+        String whatsappLink = "https://wa.me/" + phoneNumber + "?text=" + message;
+
+        // Create an Anchor component that opens the WhatsApp link in a new tab
+        Anchor whatsAppButton = new Anchor(whatsappLink, whatsappImage);
+        whatsAppButton.getStyle().set("padding-right", "1%");
+        whatsAppButton.setTarget("_blank"); // Open link in a new tab
+
+        addToNavbar(navigation, whatsAppButton);
 
     }
 
-    // private H1 viewTitle;
-
-    // public MainLayout() {
-    // setPrimarySection(Section.DRAWER);
-    // addDrawerContent();
-    // addHeaderContent();
-    // }
-
-    // private void addHeaderContent() {
-    // DrawerToggle toggle = new DrawerToggle();
-    // toggle.setAriaLabel("Menu toggle");
-
-    // viewTitle = new H1();
-    // viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
-
-    // addToNavbar(true, toggle, viewTitle);
-    // }
-
-    // private void addDrawerContent() {
-    // Span appName = new Span("My App");
-    // appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD,
-    // LumoUtility.FontSize.LARGE);
-    // Header header = new Header(appName);
-
-    // Scroller scroller = new Scroller(createNavigation());
-
-    // addToDrawer(header, scroller, createFooter());
-    // }
-
-    // private SideNav createNavigation() {
-    // SideNav nav = new SideNav();
-
-    // nav.addItem(new SideNavItem("Hello World", HelloWorldView.class,
-    // LineAwesomeIcon.GLOBE_SOLID.create()));
-    // nav.addItem(new SideNavItem("About", AboutView.class,
-    // LineAwesomeIcon.FILE.create()));
-
-    // return nav;
-    // }
-
-    // private Footer createFooter() {
-    // Footer layout = new Footer();
-
-    // return layout;
-    // }
-
-    // @Override
-    // protected void afterNavigation() {
-    // super.afterNavigation();
-    // viewTitle.setText(getCurrentPageTitle());
-    // }
-
-    // private String getCurrentPageTitle() {
-    // PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
-    // return title == null ? "" : title.value();
-    // }
 }

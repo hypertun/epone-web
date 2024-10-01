@@ -12,6 +12,7 @@
     <properties>
         <java.version>21</java.version>
         <vaadin.version>24.4.6</vaadin.version>
+        <vaadin.widgetset.mode>cdn</vaadin.widgetset.mode>
     </properties>
 
     <parent>
@@ -87,6 +88,11 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench-junit5</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
         </dependency>
     </dependencies>
 
@@ -189,6 +195,7 @@
                         <configuration>
                             <trimStackTrace>false</trimStackTrace>
                             <enableAssertions>true</enableAssertions>
+                            <frontendHotdeploy>true</frontendHotdeploy>
                         </configuration>
                     </plugin>
                 </plugins>
