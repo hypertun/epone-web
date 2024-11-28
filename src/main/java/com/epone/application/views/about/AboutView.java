@@ -16,6 +16,27 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 @Route(value = "about", layout = MainLayout.class)
 public class AboutView extends VerticalLayout {
 
+    String whoAreWeHeadingHTML = "<span>Who</span> <span style=\"color:green\">Are We?</span>";
+    String whoAreWeStatement = "Our company, EP One Manpower Pte Ltd is one of the leading maid agencies in\n" + //
+                "Singapore with more than 15 years of experience in providing households with well-\n" + //
+                "trained helpers. We are dedicated to providing reliable and professional maid services\n" + //
+                "tailored to your home care needs. We ensure high quality training for our helper\n" + //
+                "before and after they come over to Singapore. Most importantly, each helper has to be\n" + //
+                "interviewed either face-to-face while still in their home-country or through a webcam\n" + //
+                "to assess their understanding of basic English (or other spoken languages), experience\n" + //
+                "levels, positiveness and facial expression to accept certain job scope etc. We try our\n" + //
+                "best to vet through all the helper’s documentation thoroughly, like employment\n" + //
+                "history, height, weight, medical history, family situation, past working experiences etc\n" + //
+                "to ensure minimal dispute when helper arrives in Singapore.\n" + //
+                "With the convenience of 3 branches ( Bukit Timah, Hougang and Sin Ming)\n" + //
+                "strategically located across Singapore, we are here to service you better. We have\n" + //
+                "marked our name as one of the leading employment agencies that has thousands of\n" + //
+                "satisfied customers in Singapore.\n" + //
+                "We pride ourselves in providing good customer services, quality helpers and other\n" + //
+                "value added services with the most competitive price. We do not work towards\n" + //
+                "maximizing profits because we value our customers (employers as well as helpers) as\n" + //
+                "assets of our company. On costing we are transparent without any hidden fee.";
+
     String visionStatement = "To source, train and match most suitable fdw to our invaluable clients with professional services.";
     String visionHeadingHTML = "<span>Our</span> <span style=\"color:green\">Vision</span>";
 
@@ -23,9 +44,12 @@ public class AboutView extends VerticalLayout {
     String history1 = "EP One Manpower Pte Ltd was established in 2012, after the owner of the agency has several issues with his own Foreign Domestic Worker (FDW) and several business trips (food businesses) to countries such as Indonesia, Philippines and Myanmar. Being a person good in processes improvement and character enhancement, he started off the Employment Agency's business by recruiting personally a few Indonesian candidates with good potential. He trained them personally, brief them and inculcate in them value of hard working, ability to take hardship, meticulous in doing chores and hygiene.";
     String history2 = "Today EP One Manpower Pte Ltd has 3 branches located in Bukit Timah, Hougang and Sin Ming areas, with several Training Centres overseas in Myanmar, Philippine, Indonesia and India. EP One Manpower Pte Ltd is committed to match you with the most competence workers through constant screening in the worker's home-country, training and inculcating the correct value in the workers, prior to come into Singapore, and with best services.";
 
-    String myanmarHeading = "<span>Face to Face</span> <span style=\"color:green\">Interview</span><span> in Myanmar, May 2017</span>";
+    String myanmarHeading = "<span>Face to Face</span> <span style=\"color:green\">Interview</span><span> in Myanmar</span>";
 
     public AboutView() {
+        VerticalLayout whoAreWeVertical = new VerticalLayout();
+        whoAreWeVertical.add(getCardFormat(getHeading(whoAreWeHeadingHTML),new Paragraph(whoAreWeStatement)));
+
         VerticalLayout explainVertical = new VerticalLayout();
         explainVertical.add(getCardFormat(getHeading(visionHeadingHTML), new Paragraph(visionStatement)));
         explainVertical
@@ -42,10 +66,10 @@ public class AboutView extends VerticalLayout {
         myanmarLayout.setAlignItems(FlexComponent.Alignment.CENTER);
         myanmarLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
-        VerticalLayout aboutVertical = new VerticalLayout(aboutHorizontal, myanmarLayout);
+        VerticalLayout aboutVertical = new VerticalLayout(whoAreWeVertical,aboutHorizontal, myanmarLayout);
 
         add(aboutVertical);
-        getStyle().set("padding-left", "300px").set("padding-right", "300px");
+        getStyle().set("padding-left", "5%").set("padding-right", "5%");
     }
 
     private VerticalLayout getCardFormat(Component header, Component... content) {

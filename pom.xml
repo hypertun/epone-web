@@ -116,6 +116,16 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <projectId>epone-442606</projectId>
+                    <version>epone-442606</version>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

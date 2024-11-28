@@ -1,6 +1,9 @@
 package com.epone.application.views.landing;
 
+import org.checkerframework.checker.units.qual.s;
+
 import com.epone.application.views.MainLayout;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -17,8 +20,10 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 @RouteAlias(value = "", layout = MainLayout.class)
 public class LandingPage extends VerticalLayout {
 
-        // private TextField name;
-        // private Button sayHello;
+        String matchStatement = "<span>At EP One Manpower, we are doing our very best to match </span><span style=\"color:green\">YOU</span>"
+                        +
+                        " a <span style=\"color:green\">HELPER</span><span> who meets your family’s needs.</span>";
+
         String leadStatement = "<span>One Of The </span><span style=\"color:green\">Top Maid Agencies</span><span> In Singapore</span>";
         Paragraph leadPara = new Paragraph("At EPOne, our mission is to be the preferred and trusted employment agency"
                         +
@@ -51,10 +56,15 @@ public class LandingPage extends VerticalLayout {
                 VerticalLayout ourServices = new VerticalLayout(getHeading(ourServicesStatement), ourServicesPara);
                 ourServices.setAlignItems(FlexComponent.Alignment.CENTER);
 
-                add(footerBanner, adsHori, ourServices);
+                H1 matchHeading = new H1();
+                matchHeading.getElement().setProperty("innerHTML", matchStatement);
+                matchHeading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
+                matchHeading.getStyle().set("text-align", "center");
+
+                add(footerBanner, matchHeading, adsHori, ourServices);
                 setPadding(true);
                 getThemeList().add("spacing-l");
-                getStyle().set("padding-left", "300px").set("padding-right", "300px");
+                getStyle().set("padding-left", "5%").set("padding-right", "5%");
                 setAlignItems(FlexComponent.Alignment.CENTER);
                 setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         }

@@ -102,7 +102,7 @@ public class ContactUs extends VerticalLayout {
         formLayout.setColspan(messageField, 2);
         formSendLayout.add(header, informationLayout, description, formLayout, sendButton);
         add(formSendLayout);
-        getStyle().set("padding-left", "300px").set("padding-right", "300px");
+        getStyle().set("padding-left", "5%").set("padding-right", "5%");
     }
 
     private boolean isValidInput(TextField nameField, EmailField emailField, TextField mobileField,
