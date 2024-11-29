@@ -1,12 +1,18 @@
 package com.epone.application.views.landing;
 
-import org.checkerframework.checker.units.qual.s;
-
 import com.epone.application.views.MainLayout;
+
+import javax.swing.text.html.parser.ContentModel;
+
+import com.epone.application.utilities.*;
+import com.vaadin.flow.component.charts.model.Labels;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -41,6 +47,49 @@ public class LandingPage extends VerticalLayout {
                                         +
                                         "We ensure both employers and workers have a positive and successful experience.");
 
+        String serviceTransParencyStatement = "<span style=\"color:green\">Service Transparency</span>";
+        String serviceTransParencyString = "We have a policy of transparent services as we value our customer. In this respect, we:";
+        String serviceTransParaOption1 = "Indicate the payment methods available to you i.e. cash, cheque or online bank payment etc.";
+        String serviceTransParaOption2 = "Seek and value your feedback anytime. If your feedback is less than positive, we "
+                        +
+                        "endeavour to resolve the problem either IMMEDIATELY or within a few working days, " +
+                        "depending on the complexity of each case.";
+
+        String replacementStatement = "<span style=\"color:green\">Replacement Service Guarentee</span>";
+        String replacementString = "If you are not happy, we are not happy as well. We understand your needs may change over time "
+                        +
+                        "and it is not always a one-size-fits-all.  Therefore, we provide you with a replacement helper "
+                        +
+                        "within a period of 6 months, starting from the commencement of your hire of the very first " +
+                        "helper. If you are not happy, we are not happy as well. We understand your needs may change over time "
+                        +
+                        "and it is not always a one-size-fits-all.  Therefore, we provide you with a replacement helper "
+                        +
+                        "within a period of 6 months, starting from the commencement of your hire of the very first " +
+                        "helper.";
+
+        String transfersStatement = "<span style=\"color:green\">Transfers</span>";
+        String transfersString = "If you need to transfer your helper to another employer, we can also assist you as well. The terms "
+                        +
+                        "and conditions of such transfers shall be clearly explained to you.";
+
+        String serviceAgreementStatement = "<span style=\"color:green\">Service Agreement</span>";
+        String serviceAgreementString = "We provide a fair and comprehensive Service Agreement to you which amongst other things "
+                        +
+                        "state the terms and conditions of service transactions including any deposits paid and also the "
+                        +
+                        "date of commencement of the helper’s employment.";
+
+        String confidentialityStatement = "<span style=\"color:green\">Confidentiality</span>";
+        String confidentialityString1 = "​We will collect personal information provided by our users, including their names, "
+                        +
+                        "mobile telephone numbers, email addresses, resumes etc. to provide our services to " + //
+                        "the users. ​The information collected is used solely to provide our agency services.";
+        String confidentialityString2 = "EP One Manpower is committed to protect the privacy of your personal data. We do "
+                        +
+                        "not sell, rent, loan, trade or lease personal information obtained. The parties in which " + //
+                        "we may disclose your information include:";
+
         public LandingPage() {
                 VerticalLayout lead = new VerticalLayout(getHeading(leadStatement), leadPara);
                 lead.setWidth("250%");
@@ -61,7 +110,7 @@ public class LandingPage extends VerticalLayout {
                 matchHeading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
                 matchHeading.getStyle().set("text-align", "center");
 
-                add(footerBanner, matchHeading, adsHori, ourServices);
+                add(footerBanner, matchHeading, adsHori, ourServices, getServices());
                 setPadding(true);
                 getThemeList().add("spacing-l");
                 getStyle().set("padding-left", "5%").set("padding-right", "5%");
@@ -99,6 +148,76 @@ public class LandingPage extends VerticalLayout {
                 heading.getElement().setProperty("innerHTML", html);
                 heading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
                 return heading;
+        }
+
+        private H4 getH4Heading(String html) {
+                H4 heading = new H4();
+                heading.getElement().setProperty("innerHTML", html);
+                heading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
+                return heading;
+        }
+
+        private Image getServiceImage(String imageLoc, String imageName) {
+                Image im = new Image(imageLoc, imageName);
+                im.setHeight("300px");
+                im.setWidth("300px");
+                return im;
+        }
+
+        private VerticalLayout getServices() {
+                VerticalLayout sLayout = new VerticalLayout();
+
+                Image tIm = getServiceImage("icons/support.png", "service transparency image");
+                Image rIm = getServiceImage("icons/replace.png", "replacement image");
+                Image transferIm = getServiceImage("icons/transfer.png", "transfer image");
+                Image saIm = getServiceImage("icons/case.png", "service agreement image");
+                Image cIm = getServiceImage("icons/confidentiality.png", "confidentiality image");
+
+                HTMLUnorderedList serviceTransOptionsList = new HTMLUnorderedList();
+                serviceTransOptionsList.addListItem(serviceTransParaOption1, serviceTransParaOption2);
+                NativeLabel serviceTransOptions = new NativeLabel();
+                serviceTransOptions.getElement().setProperty("innerHTML", serviceTransOptionsList.getHtml("uol"));
+
+                VerticalLayout tVerticalLayout = new VerticalLayout(getH4Heading(serviceTransParencyStatement),
+                                new Paragraph(serviceTransParencyString), serviceTransOptions);
+                HorizontalLayout tHorizontalLayout = new HorizontalLayout(tIm, tVerticalLayout);
+
+                VerticalLayout rVerticalLayout = new VerticalLayout(getH4Heading(replacementStatement),
+                                new Paragraph(replacementString));
+                HorizontalLayout rHorizontalLayout = new HorizontalLayout(rVerticalLayout, rIm);
+
+                VerticalLayout transferVerticalLayout = new VerticalLayout(getH4Heading(transfersStatement),
+                                new Paragraph(transfersString));
+                HorizontalLayout transferHorizontalLayout = new HorizontalLayout(transferIm, transferVerticalLayout);
+
+                VerticalLayout saVerticalLayout = new VerticalLayout(getH4Heading(serviceAgreementStatement),
+                                new Paragraph(serviceAgreementString));
+                HorizontalLayout saHorizontalLayout = new HorizontalLayout(saVerticalLayout, saIm);
+
+                HTMLUnorderedList cHtmlUnorderedList = new HTMLUnorderedList();
+                cHtmlUnorderedList.addListItem("Government Agencies",
+                                "3rd Party Service Providers that act as our agents, contractors and service providers",
+                                "Companies that support or facilitate your needs",
+                                "Other parties in which you have given consent");
+                NativeLabel cOptions = new NativeLabel();
+                cOptions.getElement().setProperty("innerHTML", cHtmlUnorderedList.getHtml("uol"));
+
+                VerticalLayout cVerticalLayout = new VerticalLayout(getH4Heading(confidentialityStatement),
+                                new Paragraph(confidentialityString1),
+                                new Paragraph(confidentialityString2),
+                                cOptions);
+                HorizontalLayout cHorizontalLayout = new HorizontalLayout(cIm, cVerticalLayout);
+
+                sLayout.add(tHorizontalLayout, rHorizontalLayout, transferHorizontalLayout, saHorizontalLayout,
+                                cHorizontalLayout);
+                sLayout.setAlignItems(FlexComponent.Alignment.CENTER);
+                sLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
+                sLayout.setWidth("100%");
+                sLayout.setSpacing(false);
+                sLayout.setPadding(false);
+                sLayout.getStyle().set("border", "1px solid black");
+
+                return sLayout;
         }
 
 }

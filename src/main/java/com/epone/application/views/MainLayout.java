@@ -38,12 +38,12 @@ public class MainLayout extends AppLayout {
         Button contactButton = new Button("Contact Us");
         contactButton.addClickListener(e -> contactButton.getUI().ifPresent(ui -> ui.navigate("contact")));
 
-        navigation.add(sCompanyLogo, searchMaidsButton, homeButton, aboutButton, contactButton);
+        navigation.add(sCompanyLogo, homeButton, searchMaidsButton, aboutButton, contactButton);
         navigation.getElement();
 
         Image whatsappImage = new Image("images/WhatsAppButtonGreenSmall.png", "whatsappButton");
         whatsappImage.setHeight("50px");
-        
+
         // Construct the WhatsApp link with your desired phone number and message
         String phoneNumber = "+6591269010"; // Replace with the actual phone number
         String message = "Hello! I'm interested in a helper!"; // Replace with your message

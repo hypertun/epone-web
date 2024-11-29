@@ -6,3 +6,10 @@ vaadin-app-layout::part(navbar) {
     border-color: grey;
     background: white;
   }
+
+  ul.uol {
+    margin: 0;
+    padding-left: 35px;
+    color: gray;
+    overflow: hidden;
+ }
