@@ -1,12 +1,17 @@
 package com.epone.application.views;
 
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.contextmenu.SubMenu;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.theme.lumo.LumoUtility;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -19,26 +24,31 @@ public class MainLayout extends AppLayout {
         sCompanyLogo.setHeight("100px");
         sCompanyLogo.getStyle().set("padding-right", "5%");
 
+        MenuBar menuBar = new MenuBar();
+
         HorizontalLayout navigation = new HorizontalLayout();
         navigation.setWidth("100%");
-        navigation.setPadding(true);
         navigation.setAlignItems(FlexComponent.Alignment.CENTER);
         navigation.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
-        Button searchMaidsButton = new Button("Search Maids", e -> {
+        menuBar.addItem("Seach Maids", e -> {
             UI.getCurrent().getPage().setLocation("https://epone.netmaid.com.sg/searchmaid");
         });
 
-        Button homeButton = new Button("Home");
-        homeButton.addClickListener(e -> homeButton.getUI().ifPresent(ui -> ui.navigate("home")));
+        menuBar.addItem("Home", clickListenerToPage("home"));
+        menuBar.addItem("About Us", clickListenerToPage("about"));
 
-        Button aboutButton = new Button("About Us");
-        aboutButton.addClickListener(e -> aboutButton.getUI().ifPresent(ui -> ui.navigate("about")));
+        MenuItem servicesSubItem = menuBar.addItem("Services");
+        servicesSubItem.addClassNames(LumoUtility.Background.PRIMARY,
+        LumoUtility.TextColor.PRIMARY_CONTRAST);
+        SubMenu servicesSubMenu = servicesSubItem.getSubMenu();
+        SubMenu typesOfHelpersMenu = servicesSubMenu.addItem("Types Of Helpers").getSubMenu();
+        typesOfHelpersMenu.addItem("Fresh Maids", clickListenerToPage("fresh maids"));
+        typesOfHelpersMenu.addItem("Experienced Maids", clickListenerToPage("exp maids"));
 
-        Button contactButton = new Button("Contact Us");
-        contactButton.addClickListener(e -> contactButton.getUI().ifPresent(ui -> ui.navigate("contact")));
+        menuBar.addItem("Contact Us", clickListenerToPage("contact"));
 
-        navigation.add(sCompanyLogo, homeButton, searchMaidsButton, aboutButton, contactButton);
+        navigation.add(sCompanyLogo, menuBar);
         navigation.getElement();
 
         Image whatsappImage = new Image("images/WhatsAppButtonGreenSmall.png", "whatsappButton");
@@ -56,6 +66,10 @@ public class MainLayout extends AppLayout {
 
         addToNavbar(navigation, whatsAppButton);
 
+    }
+
+    private ComponentEventListener<ClickEvent<MenuItem>> clickListenerToPage(String pageAlias) {
+        return e -> getUI().ifPresent(ui -> ui.navigate(pageAlias));
     }
 
 }

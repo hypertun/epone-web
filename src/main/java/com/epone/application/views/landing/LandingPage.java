@@ -2,17 +2,13 @@ package com.epone.application.views.landing;
 
 import com.epone.application.views.MainLayout;
 
-import javax.swing.text.html.parser.ContentModel;
-
 import com.epone.application.utilities.*;
-import com.vaadin.flow.component.charts.model.Labels;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

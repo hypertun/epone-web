@@ -6,6 +6,10 @@ vaadin-side-nav-item vaadin-icon {
   padding: 0;
 }
 
+vaadin-menu-bar-button {
+  padding: 15px;
+}
+
 [slot="drawer"]:is(header, footer) {
   display: flex;
   align-items: center;
