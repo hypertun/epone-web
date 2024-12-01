@@ -42,9 +42,12 @@ public class MainLayout extends AppLayout {
         servicesSubItem.addClassNames(LumoUtility.Background.PRIMARY,
         LumoUtility.TextColor.PRIMARY_CONTRAST);
         SubMenu servicesSubMenu = servicesSubItem.getSubMenu();
+        servicesSubMenu.addItem("Hiring A Maid", clickListenerToPage("hiring maids"));
         SubMenu typesOfHelpersMenu = servicesSubMenu.addItem("Types Of Helpers").getSubMenu();
         typesOfHelpersMenu.addItem("Fresh Maids", clickListenerToPage("fresh maids"));
         typesOfHelpersMenu.addItem("Experienced Maids", clickListenerToPage("exp maids"));
+        typesOfHelpersMenu.addItem("Transfer Maids", clickListenerToPage("transfer maids"));
+        typesOfHelpersMenu.addItem("Direct Hire Maids", clickListenerToPage("direct hire maids"));
 
         menuBar.addItem("Contact Us", clickListenerToPage("contact"));
 
