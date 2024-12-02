@@ -49,6 +49,16 @@ public class MainLayout extends AppLayout {
         typesOfHelpersMenu.addItem("Transfer Maids", clickListenerToPage("transfer maids"));
         typesOfHelpersMenu.addItem("Direct Hire Maids", clickListenerToPage("direct hire maids"));
 
+        SubMenu nationalitiesMenu = servicesSubMenu.addItem("Nationalities of Helpers").getSubMenu();
+        nationalitiesMenu.addItem("Indonesian Maids", clickListenerToPage("indo maids"));
+        nationalitiesMenu.addItem("Myanmar Maids", clickListenerToPage("myam maids"));
+        nationalitiesMenu.addItem("Philippines Maids", clickListenerToPage("phil maids"));
+        
+
+        menuBar.addItem("Training", clickListenerToPage("training maids"));
+
+        menuBar.addItem("FAQs", clickListenerToPage("faq"));
+
         menuBar.addItem("Contact Us", clickListenerToPage("contact"));
 
         navigation.add(sCompanyLogo, menuBar);
