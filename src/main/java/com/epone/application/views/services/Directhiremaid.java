@@ -1,17 +1,13 @@
 package com.epone.application.views.services;
 
+import com.epone.application.EponePage;
 import com.epone.application.views.MainLayout;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 
 @PageTitle("Direct Hire Maids")
 @Route(value = "direct hire maids", layout = MainLayout.class)
-public class Directhiremaid extends VerticalLayout {
+public class Directhiremaid extends EponePage {
     String heading = "<span style=\"color:green\">Direct Hire Maids<span>";
     String bodyStm1 = """
         Direct hiring involves employers sourcing their own maids directly from their home countries.\
@@ -22,26 +18,12 @@ public class Directhiremaid extends VerticalLayout {
 
    
     public Directhiremaid() {
-        add(getHeading(heading),
-                getImage("images/directhiremaid.png", "direct hire image"),
-                new Paragraph(bodyStm1));
+        add(GetH2Heading(heading),
+                GetImage("images/directhiremaid.png", "direct hire image"),
+                GetParagraph(bodyStm1));
         setPadding(true);
         getThemeList().add("spacing-l");
         getStyle().set("padding-left", "5%").set("padding-right", "5%");
-    }
-
-    private H2 getHeading(String html) {
-        H2 heading = new H2();
-        heading.getElement().setProperty("innerHTML", html);
-        heading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
-        return heading;
-    }
-
-    private Image getImage(String imageLoc, String imageName) {
-        Image im = new Image(imageLoc, imageName);
-        im.setHeight("300px");
-        im.setWidth("300px");
-        return im;
     }
 
 }

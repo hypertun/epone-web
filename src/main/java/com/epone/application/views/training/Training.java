@@ -1,18 +1,15 @@
 package com.epone.application.views.training;
 
+import com.epone.application.EponePage;
 import com.epone.application.views.MainLayout;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 
 @PageTitle("Training For Helpers")
 @Route(value = "training maids", layout = MainLayout.class)
-public class Training extends VerticalLayout {
+public class Training extends EponePage {
     String infantHeader = "<span style=\"color:green\">Infant Care Training<span>";
     String infantBody = """
             Caring for your new-borns and children while balancing work is a challenge many parents face \
@@ -57,38 +54,14 @@ public class Training extends VerticalLayout {
                 """;
 
     public Training() {
-        Image infantImage = new Image("images/infantcare.png", "infant image");
-        infantImage.setHeight("300px");
-        infantImage.setWidth("300px");
+        Image infantImage = GetImage("images/infantcare.png", "infant image");
 
-        Image elderImage = new Image("images/elderycare.png", "elder image");
-        elderImage.setHeight("300px");
-        elderImage.setWidth("300px");
+        Image elderImage = GetImage("images/elderycare.png", "elder image");
 
-        Image housekeeping = new Image("images/housekeeping.png", "housekeeping image");
-        housekeeping.setHeight("300px");
-        housekeeping.setWidth("300px");
+        Image housekeeping = GetImage("images/housekeeping.png", "housekeeping image");
 
-        addAndExpand(new HorizontalLayout(infantImage, getHeaderBodyCard(infantHeader, infantBody)),
-                new HorizontalLayout(getHeaderBodyCard(elderHeader, elderBody), elderImage),
-                new HorizontalLayout(housekeeping, getHeaderBodyCard(houseHeader, houseBody)));
-    }
-
-    private VerticalLayout getHeaderBodyCard(String header, String body) {
-        Paragraph bodypara = new Paragraph(body);
-        bodypara.getElement().setProperty("innerHTML", body);
-
-        VerticalLayout vl = new VerticalLayout(getHeading(header), bodypara);
-        vl.setPadding(true);
-        vl.getThemeList().add("spacing-l");
-        vl.getStyle().set("padding-left", "5%").set("padding-right", "5%");
-        return vl;
-    }
-
-    private H2 getHeading(String html) {
-        H2 heading = new H2();
-        heading.getElement().setProperty("innerHTML", html);
-        heading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
-        return heading;
+        addAndExpand(new HorizontalLayout(infantImage, GetHeaderBodyCardWithSpacing(GetH2Heading(infantHeader), GetParagraph(infantBody))),
+                new HorizontalLayout(GetHeaderBodyCardWithSpacing(GetH2Heading(elderHeader), GetParagraph(elderBody)), elderImage),
+                new HorizontalLayout(housekeeping, GetHeaderBodyCardWithSpacing(GetH2Heading(houseHeader), GetParagraph(houseBody))));
     }
 }

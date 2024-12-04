@@ -1,17 +1,14 @@
 package com.epone.application.views.services;
 
+import com.epone.application.EponePage;
 import com.epone.application.views.MainLayout;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 
 @PageTitle("Philippines Maids")
 @Route(value = "phil maids", layout = MainLayout.class)
-public class Phil extends VerticalLayout {
+public class Phil extends EponePage {
     String header = "<span style=\"color:green\">Philippines</span><span> Maids</span>";
     String body = """
             Filipinos are famous for their nurturing and compassionate behaviour, making them \
@@ -31,23 +28,14 @@ public class Phil extends VerticalLayout {
                         """;
 
     public Phil() {
-        Image indoImage = new Image("images/Phil.jpg", "philiphino");
+        Image indoImage = GetImage("images/Phil.jpg", "philiphino");
         indoImage.setHeight("800px");
         indoImage.setWidth("800px");
 
-        Paragraph bodypara = new Paragraph(body);
-        bodypara.getElement().setProperty("innerHTML", body);
-
-        add(getHeading(header), bodypara, indoImage);
+        add(GetH2Heading(header), GetParagraph(body), indoImage);
         setPadding(true);
         getThemeList().add("spacing-l");
         getStyle().set("padding-left", "5%").set("padding-right", "5%");
     }
 
-    private H2 getHeading(String html) {
-        H2 heading = new H2();
-        heading.getElement().setProperty("innerHTML", html);
-        heading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
-        return heading;
-    }
 }

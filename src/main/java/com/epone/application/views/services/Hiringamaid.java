@@ -1,21 +1,18 @@
 package com.epone.application.views.services;
 
+import com.epone.application.EponePage;
 import com.epone.application.views.MainLayout;
 import com.vaadin.flow.component.details.Details;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 
 @PageTitle("Hiring A Maid")
 @Route(value = "hiring maids", layout = MainLayout.class)
-public class Hiringamaid extends VerticalLayout {
+public class Hiringamaid extends EponePage {
 
     String heading = "Our 4-Step Hiring Process";
 
@@ -32,7 +29,7 @@ public class Hiringamaid extends VerticalLayout {
     String step4Body = "After completing the necessary paperwork, your helper starts work in your home.";
 
     public Hiringamaid() {
-        addAndExpand(getHeading(heading),getSteps());
+        addAndExpand(GetH1Heading(heading), getSteps());
         setPadding(true);
         getThemeList().add("spacing-l");
         getStyle().set("padding-left", "5%").set("padding-right", "5%");
@@ -41,35 +38,24 @@ public class Hiringamaid extends VerticalLayout {
         setWidth("100%");
     }
 
-    private H1 getHeading(String headingString) {
-        H1 heading = new H1(headingString);
-        heading.getStyle().set("color", "green");
-        heading.addClassNames(Margin.Top.XLARGE, Margin.Top.XLARGE);
-        return heading;
-    }
-
     private HorizontalLayout getSteps() {
         return new HorizontalLayout(
                 getCard("images/number-1.png", step1Heading, step1Body),
                 getCard("images/two.png", step2Heading, step2Body),
                 getCard("images/number-3.png", step3Heading, step3Body),
-                getCard("images/number-4.png", step4Heading, step4Body)
-        );
+                getCard("images/number-4.png", step4Heading, step4Body));
     }
 
     private Details getCard(String imageLoc,
             String title,
             String description) {
-        Image im = new Image(imageLoc, imageLoc + "image");
+        Image im = GetImage(imageLoc, imageLoc + "image");
         im.setHeight("50px");
         im.setWidth("50px");
 
-        H5 titleH5 = new H5(title);
-        titleH5.getStyle().set("color", "green");
-        titleH5.addClassNames(Margin.Top.XLARGE, Margin.Top.MEDIUM);
+        H5 titleH5 = GetH5Heading(title);
 
-
-        Details ret = new Details(im, titleH5, new Paragraph(description));
+        Details ret = new Details(im, titleH5, GetParagraph(description));
         ret.setOpened(true);
         return ret;
     }

@@ -10,6 +10,16 @@ vaadin-menu-bar-button {
   padding: 15px;
 }
 
+vaadin-accordion-panel {
+  padding: 30px;
+}
+
+vaadin-accordion-heading {
+  color: green;
+  font-style: italic;
+  font-weight: bold;
+}
+
 [slot="drawer"]:is(header, footer) {
   display: flex;
   align-items: center;

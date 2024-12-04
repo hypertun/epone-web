@@ -1,5 +1,6 @@
 package com.epone.application.views.services;
 
+import com.epone.application.EponePage;
 import com.epone.application.views.MainLayout;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
@@ -11,7 +12,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 
 @PageTitle("Transfer Maids")
 @Route(value = "transfer maids", layout = MainLayout.class)
-public class Transfermaid extends VerticalLayout {
+public class Transfermaid extends EponePage {
     String heading = "<span style=\"color:green\">Transfer Maids<span>";
     String bodyStm1 = "Transfer maids, having recent experience in Singapore households" +
             ", typically require less supervision and are likely well-acquainted with the  culture and" +
@@ -32,26 +33,12 @@ public class Transfermaid extends VerticalLayout {
                 """;;
 
     public Transfermaid() {
-        add(getHeading(heading),
-                getImage("images/transfermaid.png", "tranfer maid image"),
-                new Paragraph(bodyStm1), new Paragraph(bodyStm2), new Paragraph(bodyStm3));
+        add(GetH2Heading(heading),
+                GetImage("images/transfermaid.png", "tranfer maid image"),
+                GetParagraph(bodyStm1),GetParagraph(bodyStm2), GetParagraph(bodyStm3));
         setPadding(true);
         getThemeList().add("spacing-l");
         getStyle().set("padding-left", "5%").set("padding-right", "5%");
-    }
-
-    private H2 getHeading(String html) {
-        H2 heading = new H2();
-        heading.getElement().setProperty("innerHTML", html);
-        heading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
-        return heading;
-    }
-
-    private Image getImage(String imageLoc, String imageName) {
-        Image im = new Image(imageLoc, imageName);
-        im.setHeight("300px");
-        im.setWidth("300px");
-        return im;
     }
 
 }

@@ -3,9 +3,11 @@ package com.epone.application.views.landing;
 import com.epone.application.views.MainLayout;
 
 import com.epone.application.utilities.*;
+import com.vaadin.flow.component.dependency.JavaScript;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.html.Paragraph;
@@ -20,6 +22,8 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 @PageTitle("Welcome")
 @Route(value = "home", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
+
+@JavaScript("https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.min.js")
 public class LandingPage extends VerticalLayout {
 
         String matchStatement = "<span>At EP One Manpower, we are doing our very best to match </span><span style=\"color:green\">YOU</span>"
@@ -106,7 +110,12 @@ public class LandingPage extends VerticalLayout {
                 matchHeading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
                 matchHeading.getStyle().set("text-align", "center");
 
-                add(footerBanner, matchHeading, adsHori, ourServices, getServices());
+                IFrame googleReviews = new IFrame("https://cb8234035643410dbfe274a473e5bff9.elf.site");
+                googleReviews.getElement().executeJs("iFrameResize(this)");
+                googleReviews.setWidth("100%");
+                googleReviews.getStyle().set("border","none");
+
+                add(footerBanner, matchHeading, adsHori, googleReviews, ourServices, getServices());
                 setPadding(true);
                 getThemeList().add("spacing-l");
                 getStyle().set("padding-left", "5%").set("padding-right", "5%");

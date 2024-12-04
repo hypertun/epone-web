@@ -272,5 +272,8 @@ public class Questions extends Accordion {
             getPara.getElement().setProperty("innerHTML", qna.get(i));
             add(i, getPara);
         }
+
+        getStyle().set("padding-left", "100px");
+        getStyle().set("padding-right", "100px"); 
     }
 }
