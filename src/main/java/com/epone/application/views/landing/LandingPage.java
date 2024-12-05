@@ -1,41 +1,46 @@
 package com.epone.application.views.landing;
 
 import com.epone.application.views.MainLayout;
-
+import com.epone.application.views.contactus.ContactUs;
+import com.epone.application.EponePage;
 import com.epone.application.utilities.*;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.JavaScript;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
+import com.vaadin.flow.theme.lumo.LumoUtility.Margin.Minus.Vertical;
 
 @PageTitle("Welcome")
 @Route(value = "home", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 
 @JavaScript("https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.min.js")
-public class LandingPage extends VerticalLayout {
+public class LandingPage extends EponePage {
 
-        String matchStatement = "<span>At EP One Manpower, we are doing our very best to match </span><span style=\"color:green\">YOU</span>"
-                        +
-                        " a <span style=\"color:green\">HELPER</span><span> who meets your family’s needs.</span>";
+        String matchStatement = """
+                        <span>Matching You With A Helper
+                        Who Meets Your Family's Needs</span><span style=\"color:green\">.</span>
+                        """;
 
         String leadStatement = "<span>One Of The </span><span style=\"color:green\">Top Maid Agencies</span><span> In Singapore</span>";
-        Paragraph leadPara = new Paragraph("At EPOne, our mission is to be the preferred and trusted employment agency"
+        String leadPara = "At EPOne, our mission is to be the preferred and trusted employment agency"
                         +
                         " for the provision of Foreign Domestic Workers to both our clients and candidates. We are committed"
                         +
-                        " to provide professional services, and to source and train the best helpers to exceed our customer's expectation, at low cost.");
+                        " to provide professional services, and to source and train the best helpers to exceed our customer's expectation, at low cost.";
 
         String ourServicesStatement = "<span>Our</span> <span style=\"color:green\">Services</span>";
         Paragraph ourServicesPara = new Paragraph(
@@ -91,9 +96,10 @@ public class LandingPage extends VerticalLayout {
                         "we may disclose your information include:";
 
         public LandingPage() {
-                VerticalLayout lead = new VerticalLayout(getHeading(leadStatement), leadPara);
+                HorizontalLayout titleBlock = getTitleBlock();
+
+                VerticalLayout lead = new VerticalLayout(GetH2Heading(leadStatement), GetParagraph(leadPara));
                 lead.setWidth("250%");
-                Image footerBanner = new Image("images/banner.png", "banner");
 
                 HorizontalLayout adsHori = new HorizontalLayout(lead,
                                 getReviewFormat("With over", "10+", "years of experience"),
@@ -101,21 +107,17 @@ public class LandingPage extends VerticalLayout {
                                 getReviewFormat("Average Score Of", "4.0+", "On Google Reviews"));
                 adsHori.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
                 adsHori.setAlignItems(FlexComponent.Alignment.CENTER);
+                adsHori.getStyle().set("border", "none").set("padding-top", "10%");
 
-                VerticalLayout ourServices = new VerticalLayout(getHeading(ourServicesStatement), ourServicesPara);
+                VerticalLayout ourServices = new VerticalLayout(GetH2Heading(ourServicesStatement), ourServicesPara);
                 ourServices.setAlignItems(FlexComponent.Alignment.CENTER);
-
-                H1 matchHeading = new H1();
-                matchHeading.getElement().setProperty("innerHTML", matchStatement);
-                matchHeading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
-                matchHeading.getStyle().set("text-align", "center");
 
                 IFrame googleReviews = new IFrame("https://cb8234035643410dbfe274a473e5bff9.elf.site");
                 googleReviews.getElement().executeJs("iFrameResize(this)");
                 googleReviews.setWidth("100%");
-                googleReviews.getStyle().set("border","none");
+                googleReviews.getStyle().set("border", "none").set("padding", "10%");
 
-                add(footerBanner, matchHeading, adsHori, googleReviews, ourServices, getServices());
+                add(titleBlock, adsHori, googleReviews, ourServices, getServices());
                 setPadding(true);
                 getThemeList().add("spacing-l");
                 getStyle().set("padding-left", "5%").set("padding-right", "5%");
@@ -148,54 +150,67 @@ public class LandingPage extends VerticalLayout {
                 return returnedLayout;
         }
 
-        private H2 getHeading(String html) {
-                H2 heading = new H2();
-                heading.getElement().setProperty("innerHTML", html);
-                heading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
-                return heading;
-        }
+        private HorizontalLayout getTitleBlock() {
+                H1 matchHeading = GetH1Heading(matchStatement);
+                matchHeading.getStyle().set("text-align", "left").set("font-size", "80px").set("padding", "0");
 
-        private H4 getH4Heading(String html) {
-                H4 heading = new H4();
-                heading.getElement().setProperty("innerHTML", html);
-                heading.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
-                return heading;
-        }
+                H2 matchDes = GetH2Heading(leadPara);
+                matchDes.getStyle().set("text-align", "left").set("font-size", "20px").set("color", "grey")
+                                .set("padding", "0");
 
-        private Image getServiceImage(String imageLoc, String imageName) {
-                Image im = new Image(imageLoc, imageName);
-                im.setHeight("300px");
-                im.setWidth("300px");
-                return im;
+                HorizontalLayout locations = new HorizontalLayout(GetParagraph(ContactUs.Office1HTML),
+                                GetParagraph(ContactUs.Office2HTML),
+                                GetParagraph(ContactUs.Office3HTML));
+                VerticalLayout locationsWithHeader = new VerticalLayout(new Span("Offices"), locations);
+                locationsWithHeader.getStyle().set("font-size", "10px").set("color", "grey")
+                                .set("border", "1px solid grey").set("padding", "0");
+                locationsWithHeader.setAlignItems(FlexComponent.Alignment.CENTER);
+                locationsWithHeader.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
+                locationsWithHeader.setSpacing(false);
+
+                Button browseButton = new Button("Browse Now!", e -> {
+                        UI.getCurrent().getPage().setLocation("https://epone.netmaid.com.sg/searchmaid");
+                });
+                browseButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_LARGE,
+                                ButtonVariant.LUMO_SUCCESS);
+
+                VerticalLayout leftSide = new VerticalLayout(matchHeading, matchDes, locationsWithHeader, browseButton);
+                leftSide.setAlignItems(FlexComponent.Alignment.CENTER);
+
+                Image titlePic = GetImage("images/msweeping.png", "maid sweeping");
+                titlePic.setWidth("50%");
+                titlePic.setHeight("50%");
+
+                return new HorizontalLayout(leftSide, titlePic);
         }
 
         private VerticalLayout getServices() {
                 VerticalLayout sLayout = new VerticalLayout();
 
-                Image tIm = getServiceImage("icons/support.png", "service transparency image");
-                Image rIm = getServiceImage("icons/replace.png", "replacement image");
-                Image transferIm = getServiceImage("icons/transfer.png", "transfer image");
-                Image saIm = getServiceImage("icons/case.png", "service agreement image");
-                Image cIm = getServiceImage("icons/confidentiality.png", "confidentiality image");
+                Image tIm = GetImage("icons/support.png", "service transparency image");
+                Image rIm = GetImage("icons/replace.png", "replacement image");
+                Image transferIm = GetImage("icons/transfer.png", "transfer image");
+                Image saIm = GetImage("icons/case.png", "service agreement image");
+                Image cIm = GetImage("icons/confidentiality.png", "confidentiality image");
 
                 HTMLUnorderedList serviceTransOptionsList = new HTMLUnorderedList();
                 serviceTransOptionsList.addListItem(serviceTransParaOption1, serviceTransParaOption2);
                 NativeLabel serviceTransOptions = new NativeLabel();
                 serviceTransOptions.getElement().setProperty("innerHTML", serviceTransOptionsList.getHtml("uol"));
 
-                VerticalLayout tVerticalLayout = new VerticalLayout(getH4Heading(serviceTransParencyStatement),
+                VerticalLayout tVerticalLayout = new VerticalLayout(GetH4Heading(serviceTransParencyStatement),
                                 new Paragraph(serviceTransParencyString), serviceTransOptions);
                 HorizontalLayout tHorizontalLayout = new HorizontalLayout(tIm, tVerticalLayout);
 
-                VerticalLayout rVerticalLayout = new VerticalLayout(getH4Heading(replacementStatement),
+                VerticalLayout rVerticalLayout = new VerticalLayout(GetH4Heading(replacementStatement),
                                 new Paragraph(replacementString));
                 HorizontalLayout rHorizontalLayout = new HorizontalLayout(rVerticalLayout, rIm);
 
-                VerticalLayout transferVerticalLayout = new VerticalLayout(getH4Heading(transfersStatement),
+                VerticalLayout transferVerticalLayout = new VerticalLayout(GetH4Heading(transfersStatement),
                                 new Paragraph(transfersString));
                 HorizontalLayout transferHorizontalLayout = new HorizontalLayout(transferIm, transferVerticalLayout);
 
-                VerticalLayout saVerticalLayout = new VerticalLayout(getH4Heading(serviceAgreementStatement),
+                VerticalLayout saVerticalLayout = new VerticalLayout(GetH4Heading(serviceAgreementStatement),
                                 new Paragraph(serviceAgreementString));
                 HorizontalLayout saHorizontalLayout = new HorizontalLayout(saVerticalLayout, saIm);
 
@@ -207,7 +222,7 @@ public class LandingPage extends VerticalLayout {
                 NativeLabel cOptions = new NativeLabel();
                 cOptions.getElement().setProperty("innerHTML", cHtmlUnorderedList.getHtml("uol"));
 
-                VerticalLayout cVerticalLayout = new VerticalLayout(getH4Heading(confidentialityStatement),
+                VerticalLayout cVerticalLayout = new VerticalLayout(GetH4Heading(confidentialityStatement),
                                 new Paragraph(confidentialityString1),
                                 new Paragraph(confidentialityString2),
                                 cOptions);

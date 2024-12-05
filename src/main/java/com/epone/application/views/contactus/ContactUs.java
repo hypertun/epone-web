@@ -29,9 +29,9 @@ import org.apache.commons.mail.SimpleEmail;
 public class ContactUs extends VerticalLayout {
 
     private static final String contactUsHeader = "<span>Contact Us!</span> <span style=\"color:green\"> We Want To Help!</span>";
-    private static final String office1HTML = "<span>170, Upper Bukit Timah Road, #03-09<br>Bukit Timah Shopping Centre<br>Singapore 588179</span>";
-    private static final String office2HTML = "<span>21, Hougang Street 51, #02-25<br>Hougang Green Shopping Mall<br>Singapore 538719</span>";
-    private static final String office3HTML = "<span>Apt Blk 23, Sin Ming Road #01-19<br>Sin Ming Ville<br>Singapore 570023</span>";
+    public static final String Office1HTML = "<span>170, Upper Bukit Timah Road, #03-09<br>Bukit Timah Shopping Centre<br>Singapore 588179</span>";
+    public static final String Office2HTML = "<span>21, Hougang Street 51, #02-25<br>Hougang Green Shopping Mall<br>Singapore 538719</span>";
+    public static final String Office3HTML = "<span>Apt Blk 23, Sin Ming Road #01-19<br>Sin Ming Ville<br>Singapore 570023</span>";
     private static final String office1PhoneHTML = "<span>Bukit Timah(6463 5478 / 6343 6474)<br>Ms Eve (83715665) / Ms Ann (8218 7621) / Ms Nurami</span>";
     private static final String office1EmailHTML = "<span>bt39@epone.com.sg</span>";
     private static final String office2PhoneHTML = "<span>Hougang(6463 5278 / 6463 5478)<br>Ms Laura (87216855) / Ms Edna (88172718)</span>";
@@ -152,9 +152,9 @@ public class ContactUs extends VerticalLayout {
     private HorizontalLayout getInformationLayout() {
         HorizontalLayout informationLayout = new HorizontalLayout();
 
-        HorizontalLayout office1 = getPin("", office1HTML);
-        HorizontalLayout office2 = getPin("", office2HTML);
-        HorizontalLayout office3 = getPin("", office3HTML);
+        HorizontalLayout office1 = getPin("", Office1HTML);
+        HorizontalLayout office2 = getPin("", Office2HTML);
+        HorizontalLayout office3 = getPin("", Office3HTML);
 
         HorizontalLayout office1Phone = getPin("phone", office1PhoneHTML);
         HorizontalLayout office2Phone = getPin("phone", office2PhoneHTML);
