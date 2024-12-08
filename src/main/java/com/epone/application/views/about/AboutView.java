@@ -17,24 +17,24 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 public class AboutView extends VerticalLayout {
 
     String whoAreWeHeadingHTML = "<span>Who</span> <span style=\"color:green\">Are We?</span>";
-    String whoAreWeStatement1 = "Our company, EP One Manpower Pte Ltd is one of the leading maid agencies in" + //
+    String whoAreWeStatement1 = "Our company, EP One Manpower Pte Ltd is one of the leading maid agencies in " + //
             "Singapore with more than 15 years of experience in providing households with well-" + //
-            "trained helpers. We are dedicated to providing reliable and professional maid services" + //
-            "tailored to your home care needs. We ensure high quality training for our helper" + //
-            "before and after they come over to Singapore. Most importantly, each helper has to be" + //
-            "interviewed either face-to-face while still in their home-country or through a webcam" + //
-            "to assess their understanding of basic English (or other spoken languages), experience" + //
-            "levels, positiveness and facial expression to accept certain job scope etc. We try our" + //
-            "best to vet through all the helper’s documentation thoroughly, like employment" + //
-            "history, height, weight, medical history, family situation, past working experiences etc" + //
+            "trained helpers. We are dedicated to providing reliable and professional maid services " + //
+            "tailored to your home care needs. We ensure high quality training for our helper " + //
+            "before and after they come over to Singapore. Most importantly, each helper has to be " + //
+            "interviewed either face-to-face while still in their home-country or through a webcam " + //
+            "to assess their understanding of basic English (or other spoken languages), experience " + //
+            "levels, positiveness and facial expression to accept certain job scope etc. We try our " + //
+            "best to vet through all the helper’s documentation thoroughly, like employment " + //
+            "history, height, weight, medical history, family situation, past working experiences etc " + //
             "to ensure minimal dispute when helper arrives in Singapore.";
-    String whoAreWeStatement2 = "With the convenience of 3 branches ( Bukit Timah, Hougang and Sin Ming)" + //
-            "strategically located across Singapore, we are here to service you better. We have" + //
-            "marked our name as one of the leading employment agencies that has thousands of" + //
+    String whoAreWeStatement2 = "With the convenience of 3 branches ( Bukit Timah, Hougang and Sin Ming) " + //
+            "strategically located across Singapore, we are here to service you better. We have " + //
+            "marked our name as one of the leading employment agencies that has thousands of " + //
             "satisfied customers in Singapore.";
-    String whoAreWeStatement3 = "We pride ourselves in providing good customer services, quality helpers and other" + //
-            "value added services with the most competitive price. We do not work towards" + //
-            "maximizing profits because we value our customers (employers as well as helpers) as" + //
+    String whoAreWeStatement3 = "We pride ourselves in providing good customer services, quality helpers and other " + //
+            "value added services with the most competitive price. We do not work towards " + //
+            "maximizing profits because we value our customers (employers as well as helpers) as " + //
             "assets of our company. On costing we are transparent without any hidden fee.";
 
     String visionStatement = "To source, train and match most suitable fdw to our invaluable clients with professional services.";

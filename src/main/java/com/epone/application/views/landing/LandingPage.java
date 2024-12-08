@@ -21,7 +21,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin.Minus.Vertical;
 
 @PageTitle("Welcome")
 @Route(value = "home", layout = MainLayout.class)
@@ -152,21 +151,27 @@ public class LandingPage extends EponePage {
 
         private HorizontalLayout getTitleBlock() {
                 H1 matchHeading = GetH1Heading(matchStatement);
-                matchHeading.getStyle().set("text-align", "left").set("font-size", "80px").set("padding", "0");
+                matchHeading.getStyle().set("text-align", "left").set("padding", "0");
 
                 H2 matchDes = GetH2Heading(leadPara);
-                matchDes.getStyle().set("text-align", "left").set("font-size", "20px").set("color", "grey")
+                matchDes.getStyle().set("text-align", "left").set("font-size", "15px").set("color", "grey")
                                 .set("padding", "0");
 
                 HorizontalLayout locations = new HorizontalLayout(GetParagraph(ContactUs.Office1HTML),
                                 GetParagraph(ContactUs.Office2HTML),
                                 GetParagraph(ContactUs.Office3HTML));
-                VerticalLayout locationsWithHeader = new VerticalLayout(new Span("Offices"), locations);
+                locations.setPadding(true);
+                locations.getThemeList().add("spacing-xs");
+                locations.setJustifyContentMode(FlexComponent.JustifyContentMode.EVENLY);
+
+                VerticalLayout locationsWithHeader = new VerticalLayout(new Span("Offices:"), locations);
                 locationsWithHeader.getStyle().set("font-size", "10px").set("color", "grey")
                                 .set("border", "1px solid grey").set("padding", "0");
-                locationsWithHeader.setAlignItems(FlexComponent.Alignment.CENTER);
-                locationsWithHeader.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
+                locationsWithHeader.setAlignItems(FlexComponent.Alignment.STRETCH);
+                locationsWithHeader.setPadding(false);
+                locationsWithHeader.setMargin(false);
                 locationsWithHeader.setSpacing(false);
+                ;
 
                 Button browseButton = new Button("Browse Now!", e -> {
                         UI.getCurrent().getPage().setLocation("https://epone.netmaid.com.sg/searchmaid");
@@ -178,8 +183,8 @@ public class LandingPage extends EponePage {
                 leftSide.setAlignItems(FlexComponent.Alignment.CENTER);
 
                 Image titlePic = GetImage("images/msweeping.png", "maid sweeping");
-                titlePic.setWidth("50%");
-                titlePic.setHeight("50%");
+                titlePic.setHeight(leftSide.getHeight());
+                titlePic.setWidth("30%");
 
                 return new HorizontalLayout(leftSide, titlePic);
         }

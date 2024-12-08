@@ -1,5 +1,10 @@
 package com.epone.application.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.UI;
@@ -17,14 +22,25 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
  * The main view is a top-level placeholder for other views.
  */
 public class MainLayout extends AppLayout {
+    private String selectPage = "Home";
+    private List<MenuItem> allMenuItems = new ArrayList<MenuItem>();
+
+    private final String homePage = "Home";
+    private final String aboutPage = "About Us";
+    private final String servicesPage = "Services";
+    private final String trainingPage = "Training";
+    private final String faqPage = "FAQs";
+    private final String contactPage = "Contact Us";
 
     public MainLayout() {
+        initialSetPage();
+
         Image sCompanyLogo = new Image("images/small-logo.png", "sCompanyLogo");
-        // sCompanyLogo.setWidth("100px");
         sCompanyLogo.setHeight("100px");
         sCompanyLogo.getStyle().set("padding-right", "5%");
 
         MenuBar menuBar = new MenuBar();
+        menuBar.setOpenOnHover(true);
 
         HorizontalLayout navigation = new HorizontalLayout();
         navigation.setWidth("100%");
@@ -35,13 +51,11 @@ public class MainLayout extends AppLayout {
             UI.getCurrent().getPage().setLocation("https://epone.netmaid.com.sg/searchmaid");
         });
 
-        menuBar.addItem("Home", clickListenerToPage("home"));
-        menuBar.addItem("About Us", clickListenerToPage("about"));
+        this.allMenuItems.add(menuBar.addItem(homePage, clickListenerToPage("home")));
+        this.allMenuItems.add(menuBar.addItem(aboutPage, clickListenerToPage("about")));
 
-        MenuItem servicesSubItem = menuBar.addItem("Services");
-        servicesSubItem.addClassNames(LumoUtility.Background.PRIMARY,
-        LumoUtility.TextColor.PRIMARY_CONTRAST);
-        SubMenu servicesSubMenu = servicesSubItem.getSubMenu();
+        MenuItem servicespageMenuBar = menuBar.addItem(servicesPage);
+        SubMenu servicesSubMenu = servicespageMenuBar.getSubMenu();
         servicesSubMenu.addItem("Hiring A Maid", clickListenerToPage("hiring maids"));
         SubMenu typesOfHelpersMenu = servicesSubMenu.addItem("Types Of Helpers").getSubMenu();
         typesOfHelpersMenu.addItem("Fresh Maids", clickListenerToPage("fresh maids"));
@@ -53,13 +67,14 @@ public class MainLayout extends AppLayout {
         nationalitiesMenu.addItem("Indonesian Maids", clickListenerToPage("indo maids"));
         nationalitiesMenu.addItem("Myanmar Maids", clickListenerToPage("myam maids"));
         nationalitiesMenu.addItem("Philippines Maids", clickListenerToPage("phil maids"));
-        
 
-        menuBar.addItem("Training", clickListenerToPage("training maids"));
+        this.allMenuItems.add(servicespageMenuBar);
 
-        menuBar.addItem("FAQs", clickListenerToPage("faq"));
+        this.allMenuItems.add(menuBar.addItem(trainingPage, clickListenerToPage("training maids")));
 
-        menuBar.addItem("Contact Us", clickListenerToPage("contact"));
+        this.allMenuItems.add(menuBar.addItem(faqPage, clickListenerToPage("faq")));
+
+        this.allMenuItems.add(menuBar.addItem(contactPage, clickListenerToPage("contact")));
 
         navigation.add(sCompanyLogo, menuBar);
         navigation.getElement();
@@ -78,11 +93,73 @@ public class MainLayout extends AppLayout {
         whatsAppButton.setTarget("_blank"); // Open link in a new tab
 
         addToNavbar(navigation, whatsAppButton);
-
     }
 
     private ComponentEventListener<ClickEvent<MenuItem>> clickListenerToPage(String pageAlias) {
-        return e -> getUI().ifPresent(ui -> ui.navigate(pageAlias));
+        return e -> {
+            setSelectedPage(e.getSource());
+            setSelectedPageMenuBar();
+            getUI().ifPresent(ui -> ui.navigate(pageAlias));
+        };
+    }
+
+    private void setSelectedPage(MenuItem menuItem) {
+        String[] allPagesString = { homePage, aboutPage, servicesPage, trainingPage, faqPage, contactPage };
+        String menuText = menuItem.getText();
+
+        Boolean found = false;
+        if (ArrayUtils.contains(allPagesString, menuText)) {
+            found = true;
+        }
+
+        if (!found) {
+            this.selectPage = servicesPage;
+            return;
+        }
+
+        this.selectPage = menuText;
+    }
+
+    private void setSelectedPageMenuBar() {
+        for (MenuItem menuItem : this.allMenuItems) {
+            if (menuItem.getText().equals(this.selectPage)) {
+                menuItem.addClassNames(LumoUtility.Background.PRIMARY,
+                        LumoUtility.TextColor.PRIMARY_CONTRAST);
+                continue;
+            }
+
+            menuItem.removeClassNames(LumoUtility.Background.PRIMARY,
+                    LumoUtility.TextColor.PRIMARY_CONTRAST);
+        }
+    }
+
+    private void initialSetPage() {
+        UI.getCurrent().getPage().fetchCurrentURL(currentURL -> {
+            String[] urlSplit = currentURL.toString().split("/");
+            String path = urlSplit[urlSplit.length - 1];
+
+            switch (path) {
+                case "home":
+                    this.selectPage = homePage;
+                    break;
+                case "about":
+                    this.selectPage = aboutPage;
+                    break;
+                case "faq":
+                    this.selectPage = faqPage;
+                    break;
+                case "training%20maids":
+                    this.selectPage = trainingPage;
+                    break;
+                case "contact":
+                    this.selectPage = contactPage;
+                    break;
+                default:
+                    this.selectPage = servicesPage;
+            }
+
+            setSelectedPageMenuBar();
+        });
     }
 
 }
