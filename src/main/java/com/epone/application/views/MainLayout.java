@@ -135,7 +135,14 @@ public class MainLayout extends AppLayout {
 
     private void initialSetPage() {
         UI.getCurrent().getPage().fetchCurrentURL(currentURL -> {
-            String[] urlSplit = currentURL.toString().split("/");
+            String currentURLString = currentURL.toString();
+
+            if (currentURLString.charAt(currentURLString.length() - 1) == '/') {
+                setSelectedPageMenuBar();
+                return;
+            }
+
+            String[] urlSplit = currentURLString.split("/");
             String path = urlSplit[urlSplit.length - 1];
 
             switch (path) {
