@@ -25,12 +25,12 @@ public class MainLayout extends AppLayout {
     private String selectPage = "Home";
     private List<MenuItem> allMenuItems = new ArrayList<MenuItem>();
 
-    private static final String homePage = "Home";
-    private static final String aboutPage = "About Us";
-    private static final String servicesPage = "Services";
-    private static final String trainingPage = "Training";
-    private static final String faqPage = "FAQs";
-    private static final String contactPage = "Contact Us";
+    private final String homePage = "Home";
+    private final String aboutPage = "About Us";
+    private final String servicesPage = "Services";
+    private final String trainingPage = "Training";
+    private final String faqPage = "FAQs";
+    private final String contactPage = "Contact Us";
 
     public MainLayout() {
         initialSetPage();

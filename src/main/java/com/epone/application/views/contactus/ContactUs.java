@@ -34,7 +34,7 @@ public class ContactUs extends VerticalLayout {
     public static final String Office3HTML = "<span>Apt Blk 23, Sin Ming Road #01-19<br>Sin Ming Ville<br>Singapore 570023</span>";
     private static final String office1PhoneHTML = "<span>Bukit Timah(6463 5478 / 6343 6474)<br>Ms Eve (83715665) / Ms Ann (8218 7621) / Ms Nurami</span>";
     private static final String office1EmailHTML = "<span>bt39@epone.com.sg</span>";
-    private static final String office2PhoneHTML = "<span>Hougang(6343 6473 / 6343 6474)<br>Ms Laura (87216855) / Ms Edna (88172718)</span>";
+    private static final String office2PhoneHTML = "<span>Hougang(6463 5278 / 6463 5478)<br>Ms Laura (87216855) / Ms Edna (88172718)</span>";
     private static final String office2EmailHTML = "<span>hg25@epone.com.sg</span>";
     private static final String office3PhoneHTML = "<span>Sin Ming(6019 0548 / 6019 0549)<br>Ms Melinda Leong (91269010)";
     private static final String office3EmailHTML = "<span>sm19@epone.com.sg</span>";

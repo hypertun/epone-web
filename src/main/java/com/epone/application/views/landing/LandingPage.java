@@ -29,20 +29,20 @@ import com.vaadin.flow.router.RouteAlias;
 @JavaScript("https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.min.js")
 public class LandingPage extends EponePage {
 
-        private static final String matchStatement = """
+        String matchStatement = """
                         <span>Matching You With A Helper
                         Who Meets Your Family's Needs</span><span style=\"color:green\">.</span>
                         """;
 
-        private static final String leadStatement = "<span>One Of The </span><span style=\"color:green\">Top Maid Agencies</span><span> In Singapore</span>";
-        private static final String leadPara = "At EPOne, our mission is to be the preferred and trusted employment agency"
+        String leadStatement = "<span>One Of The </span><span style=\"color:green\">Top Maid Agencies</span><span> In Singapore</span>";
+        String leadPara = "At EPOne, our mission is to be the preferred and trusted employment agency"
                         +
                         " for the provision of Foreign Domestic Workers to both our clients and candidates. We are committed"
                         +
                         " to provide professional services, and to source and train the best helpers to exceed our customer's expectation, at low cost.";
 
-        private static final String ourServicesStatement = "<span>Our</span> <span style=\"color:green\">Services</span>";
-        private static final Paragraph ourServicesPara = new Paragraph(
+        String ourServicesStatement = "<span>Our</span> <span style=\"color:green\">Services</span>";
+        Paragraph ourServicesPara = new Paragraph(
                         "We recruit, train, and place Foreign Domestic Workers (FDWs) from countries such as Indonesia, the Philippines, Myanmar, and India. "
                                         +
                                         "We offers comprehensive services, including pre-departure training and orientation for workers, skills matching, and full support throughout the employment process. "
@@ -51,16 +51,16 @@ public class LandingPage extends EponePage {
                                         +
                                         "We ensure both employers and workers have a positive and successful experience.");
 
-        private static final String serviceTransParencyStatement = "<span style=\"color:green\">Service Transparency</span>";
-        private static final String serviceTransParencyString = "We have a policy of transparent services as we value our customer. In this respect, we:";
-        private static final String serviceTransParaOption1 = "Indicate the payment methods available to you i.e. cash, cheque or online bank payment etc.";
-        private static final String serviceTransParaOption2 = "Seek and value your feedback anytime. If your feedback is less than positive, we "
+        String serviceTransParencyStatement = "<span style=\"color:green\">Service Transparency</span>";
+        String serviceTransParencyString = "We have a policy of transparent services as we value our customer. In this respect, we:";
+        String serviceTransParaOption1 = "Indicate the payment methods available to you i.e. cash, cheque or online bank payment etc.";
+        String serviceTransParaOption2 = "Seek and value your feedback anytime. If your feedback is less than positive, we "
                         +
                         "endeavour to resolve the problem either IMMEDIATELY or within a few working days, " +
                         "depending on the complexity of each case.";
 
-        private static final String replacementStatement = "<span style=\"color:green\">Replacement Service Guarentee</span>";
-        private static final String replacementString = "If you are not happy, we are not happy as well. We understand your needs may change over time "
+        String replacementStatement = "<span style=\"color:green\">Replacement Service Guarentee</span>";
+        String replacementString = "If you are not happy, we are not happy as well. We understand your needs may change over time "
                         +
                         "and it is not always a one-size-fits-all.  Therefore, we provide you with a replacement helper "
                         +
@@ -72,24 +72,24 @@ public class LandingPage extends EponePage {
                         "within a period of 6 months, starting from the commencement of your hire of the very first " +
                         "helper.";
 
-        private static final String transfersStatement = "<span style=\"color:green\">Transfers</span>";
-        private static final String transfersString = "If you need to transfer your helper to another employer, we can also assist you as well. The terms "
+        String transfersStatement = "<span style=\"color:green\">Transfers</span>";
+        String transfersString = "If you need to transfer your helper to another employer, we can also assist you as well. The terms "
                         +
                         "and conditions of such transfers shall be clearly explained to you.";
 
-        private static final String serviceAgreementStatement = "<span style=\"color:green\">Service Agreement</span>";
-        private static final String serviceAgreementString = "We provide a fair and comprehensive Service Agreement to you which amongst other things "
+        String serviceAgreementStatement = "<span style=\"color:green\">Service Agreement</span>";
+        String serviceAgreementString = "We provide a fair and comprehensive Service Agreement to you which amongst other things "
                         +
                         "state the terms and conditions of service transactions including any deposits paid and also the "
                         +
                         "date of commencement of the helper’s employment.";
 
-        private static final String confidentialityStatement = "<span style=\"color:green\">Confidentiality</span>";
-        private static final String confidentialityString1 = "​We will collect personal information provided by our users, including their names, "
+        String confidentialityStatement = "<span style=\"color:green\">Confidentiality</span>";
+        String confidentialityString1 = "​We will collect personal information provided by our users, including their names, "
                         +
                         "mobile telephone numbers, email addresses, resumes etc. to provide our services to " + //
                         "the users. ​The information collected is used solely to provide our agency services.";
-        private static final String confidentialityString2 = "EP One Manpower is committed to protect the privacy of your personal data. We do "
+        String confidentialityString2 = "EP One Manpower is committed to protect the privacy of your personal data. We do "
                         +
                         "not sell, rent, loan, trade or lease personal information obtained. The parties in which " + //
                         "we may disclose your information include:";

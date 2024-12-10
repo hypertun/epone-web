@@ -10,8 +10,8 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Training For Helpers")
 @Route(value = "training maids", layout = MainLayout.class)
 public class Training extends EponePage {
-    private static final String infantHeader = "<span style=\"color:green\">Infant Care Training<span>";
-    private static final String infantBody = """
+    String infantHeader = "<span style=\"color:green\">Infant Care Training<span>";
+    String infantBody = """
             Caring for your new-borns and children while balancing work is a challenge many parents face \
             in today’s world. To address this, parents can hire a helper to ensure their children are well taken \
             care of while they focus on their work.
@@ -23,8 +23,8 @@ public class Training extends EponePage {
             household responsibilities. Some are even capable of preparing meals for new mothers.
                 """;
 
-    private static final String elderHeader = "<span style=\"color:green\">Elder Care Training<span>";
-    private static final String elderBody = """
+    String elderHeader = "<span style=\"color:green\">Elder Care Training<span>";
+    String elderBody = """
             We are committed to provide our helper with high standard of elder care. We promise skilled \
             maids who establish trustworthy relationships and instil confidence within your household. Our \
             stringent recruitment processes ensure that only the most capable and compassionate individuals \
@@ -41,8 +41,8 @@ public class Training extends EponePage {
             consultants will promptly respond to your inquiry.
                 """;
 
-    private static final String houseHeader = "<span style=\"color:green\">Housekeeping Training<span>";
-    private static final String houseBody = """
+    String houseHeader = "<span style=\"color:green\">Housekeeping Training<span>";
+    String houseBody = """
             Balancing a demanding work schedule can make managing household responsibilities \
             challenging. At EP One Employment Agency, we understand the need for an extra set of helping \
             hands to assist you. Our reliable and experienced helpers are able to support you with cooking \
@@ -60,12 +60,8 @@ public class Training extends EponePage {
 
         Image housekeeping = GetImage("images/housekeeping.png", "housekeeping image");
 
-        addAndExpand(
-                new HorizontalLayout(infantImage,
-                        GetHeaderBodyCardWithSpacing(GetH2Heading(infantHeader), GetParagraph(infantBody))),
-                new HorizontalLayout(GetHeaderBodyCardWithSpacing(GetH2Heading(elderHeader), GetParagraph(elderBody)),
-                        elderImage),
-                new HorizontalLayout(housekeeping,
-                        GetHeaderBodyCardWithSpacing(GetH2Heading(houseHeader), GetParagraph(houseBody))));
+        addAndExpand(new HorizontalLayout(infantImage, GetHeaderBodyCardWithSpacing(GetH2Heading(infantHeader), GetParagraph(infantBody))),
+                new HorizontalLayout(GetHeaderBodyCardWithSpacing(GetH2Heading(elderHeader), GetParagraph(elderBody)), elderImage),
+                new HorizontalLayout(housekeeping, GetHeaderBodyCardWithSpacing(GetH2Heading(houseHeader), GetParagraph(houseBody))));
     }
 }
