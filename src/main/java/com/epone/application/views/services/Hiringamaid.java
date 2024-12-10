@@ -14,19 +14,19 @@ import com.vaadin.flow.router.Route;
 @Route(value = "hiring maids", layout = MainLayout.class)
 public class Hiringamaid extends EponePage {
 
-    String heading = "Our 4-Step Hiring Process";
+    private final String heading = "Our 4-Step Hiring Process";
 
-    String step1Heading = "Selection";
-    String step1Body = "You select a candidate from our extensive catalogue of available helpers.";
+    private final String step1Heading = "Selection";
+    private final String step1Body = "You select a candidate from our extensive catalogue of available helpers.";
 
-    String step2Heading = "Paperwork";
-    String step2Body = "Our professional team will handle all necessary paperwork for you.";
+    private final String step2Heading = "Paperwork";
+    private final String step2Body = "Our professional team will handle all necessary paperwork for you.";
 
-    String step3Heading = "Training";
-    String step3Body = "Before flying into Singapore, our overseas training centres will train your helper up to meet your needs.";
+    private final String step3Heading = "Training";
+    private final String step3Body = "Before flying into Singapore, our overseas training centres will train your helper up to meet your needs.";
 
-    String step4Heading = "Deployment";
-    String step4Body = "After completing the necessary paperwork, your helper starts work in your home.";
+    private final String step4Heading = "Deployment";
+    private final String step4Body = "After completing the necessary paperwork, your helper starts work in your home.";
 
     public Hiringamaid() {
         addAndExpand(GetH1Heading(heading), getSteps());

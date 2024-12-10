@@ -9,8 +9,8 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Indonesian Maids")
 @Route(value = "indo maids", layout = MainLayout.class)
 public class Indo extends EponePage {
-    String header = "<span style=\"color:green\">Indonesian</span><span> Maids</span>";
-    String body = """
+    private final String header = "<span style=\"color:green\">Indonesian</span><span> Maids</span>";
+    private final String body = """
             They communicate mainly in Bahasa Indonesia, which bears similarity to Bahasa Melayu, a \
             language commonly spoken by elderly Singaporeans. Majority of the younger Indonesian helpers \
             can communicate in English fluently due to their educational system. Some are proficient in \

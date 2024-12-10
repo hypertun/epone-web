@@ -9,8 +9,8 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Myanmar Maids")
 @Route(value = "myam maids", layout = MainLayout.class)
 public class Myanmar extends EponePage {
-    String header = "<span style=\"color:green\">Myanmar</span><span> Maids</span>";
-    String body = """
+    private final String header = "<span style=\"color:green\">Myanmar</span><span> Maids</span>";
+    private final String body = """
             The traditional culture of Myanmar highlights the significance of family unity, compassion, and \
             reciprocal assistance. These ingrained values often improve Myanmar helpers’ naturally \
             empathetic and attentive caregivers.

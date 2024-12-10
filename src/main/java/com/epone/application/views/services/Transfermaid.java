@@ -8,19 +8,19 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Transfer Maids")
 @Route(value = "transfer maids", layout = MainLayout.class)
 public class Transfermaid extends EponePage {
-    String heading = "<span style=\"color:green\">Transfer Maids<span>";
-    String bodyStm1 = "Transfer maids, having recent experience in Singapore households" +
+    private final String heading = "<span style=\"color:green\">Transfer Maids<span>";
+    private final String bodyStm1 = "Transfer maids, having recent experience in Singapore households" +
             ", typically require less supervision and are likely well-acquainted with the  culture and" +
             " lifestyle in Singapore. Being employed in Singapore, they may have picked up basic English" +
             " or Mandarin.  These are traits which may facilitate a more seamless integration" +
             " into your home and smoother communication as compared to new maids.";
 
-    String bodyStm2 = """
+    private final String bodyStm2 = """
                In most instances, transfer helpers can commence work within 3 to 4\
              working days once the change of employer has been approved by MOM.
             """;
 
-    String bodyStm3 = """
+    private final String bodyStm3 = """
             Depending on the duration and nature of domestic work of their past employment in Singapore,\
              transfer maids may request higher salaries compared to new hires.\
               Due to the shorter turnaround of local paperwork, transfer maids are often higher\
