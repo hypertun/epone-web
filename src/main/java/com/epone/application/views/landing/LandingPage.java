@@ -116,7 +116,10 @@ public class LandingPage extends EponePage {
                 googleReviews.setWidth("100%");
                 googleReviews.getStyle().set("border", "none").set("padding", "10%");
 
-                add(titleBlock, adsHori, googleReviews, ourServices, getServices());
+                Image medals = GetImage("images/medals.png", "medals image");
+                medals.setWidthFull();
+
+                add(titleBlock, adsHori, googleReviews, ourServices, getServices(), medals);
                 setPadding(true);
                 getThemeList().add("spacing-l");
                 getStyle().set("padding-left", "5%").set("padding-right", "5%");
