@@ -9,8 +9,8 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Philippines Maids")
 @Route(value = "phil maids", layout = MainLayout.class)
 public class Phil extends EponePage {
-    String header = "<span style=\"color:green\">Philippines</span><span> Maids</span>";
-    String body = """
+    private static final String header = "<span style=\"color:green\">Philippines</span><span> Maids</span>";
+    private static final String body = """
             Filipinos are famous for their nurturing and compassionate behaviour, making them \
             exceptionally well-suited for the care of infants and children. They often forge deep connections \
             with the families they serve, treating them as their own.
