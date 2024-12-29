@@ -2,11 +2,19 @@ package com.epone.application.repo;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
 
-public class netmaidcaller {
+import com.epone.application.model.NetMaidAll;
+
+public class NetMaidCaller {
 
     private static final String netMaidURL = "https://epone.netmaid.com.sg/";
+
+    private static final String netMaidGetAllUrl = netMaidURL
+            + "maids.json?startRow=%d&endRow=%d&xSearchStatus=ALL&xPublished=Y";
 
     private static final String maidsEndpoint = "maids/";
 
@@ -15,22 +23,53 @@ public class netmaidcaller {
     private static final String netMaidCookieName = "remember_user_token";
 
     // temp
-    private static final String netMaidUser = "epone";
-    private static final String netMaidPass = "";
+    private static final String netMaidUser = "slfgreen50@gmail.com";
+    private static final String netMaidPass = "GreenEP1";
 
     private final RestClient restClient;
 
-    public netmaidcaller(RestClient.Builder restClientBuilder) {
+    private static String netMaidCookie;
+
+    public NetMaidCaller(RestClient.Builder restClientBuilder) {
         this.restClient = restClientBuilder.baseUrl(netMaidURL).build();
     }
 
-    public String GetCookie() {
-        // adding headers to the api
-        HttpHeaders reqHeaders = new HttpHeaders();
-        reqHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+    public void SetCookie() {
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+        body.add("user[login]", netMaidUser);
+        body.add("user[password]", netMaidPass);
+        body.add("commit", "Log In");
+        body.add("user[remember_me]", "1");
 
-        HttpHeaders headers = this.restClient.post().uri(cookiesEndpoint).retrieve().toBodilessEntity().getHeaders();
+        HttpHeaders responseHeaders = restClient.post().uri(cookiesEndpoint).body(body)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED).retrieve().toBodilessEntity().getHeaders();
 
-        return headers.get(netMaidCookieName).toString();
+        Object[] allCookies = responseHeaders.get(HttpHeaders.SET_COOKIE).toArray();
+
+        for (Object eachCookie : allCookies) {
+            String[] cookieSplit = eachCookie.toString().split("=");
+            if (cookieSplit[0].equals(netMaidCookieName)) {
+                netMaidCookie = eachCookie.toString();
+                return;
+            }
+        }
+
+        throw new java.lang.Error("cookie not set");
     }
+
+    public NetMaidAll GetNetMaidAllMaids(int offset, int limit) {
+        HttpHeaders reqHeaders = new HttpHeaders();
+        reqHeaders.add("Cookie", netMaidCookie);
+
+        ResponseEntity<NetMaidAll> resp = restClient
+                .get()
+                .uri(String.format(netMaidGetAllUrl, offset, limit))
+                .accept(MediaType.APPLICATION_JSON)
+                .headers(headers -> headers.addAll(reqHeaders))
+                .retrieve()
+                .toEntity(NetMaidAll.class);
+
+        return resp.getBody();
+    }
+
 }
