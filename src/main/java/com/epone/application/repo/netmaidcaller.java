@@ -14,7 +14,7 @@ public class NetMaidCaller {
     private static final String netMaidURL = "https://epone.netmaid.com.sg/";
 
     private static final String netMaidGetAllUrl = netMaidURL
-            + "maids.json?startRow=%d&endRow=%d&xSearchStatus=ALL&xPublished=Y";
+            + "maids.json?xSearchStatus=ALL&xPublished=Y";
 
     private static final String maidsEndpoint = "maids/";
 
@@ -57,13 +57,13 @@ public class NetMaidCaller {
         throw new java.lang.Error("cookie not set");
     }
 
-    public NetMaidAll GetNetMaidAllMaids(int offset, int limit) {
+    public NetMaidAll GetNetMaidAllMaids() {
         HttpHeaders reqHeaders = new HttpHeaders();
         reqHeaders.add("Cookie", netMaidCookie);
 
         ResponseEntity<NetMaidAll> resp = restClient
                 .get()
-                .uri(String.format(netMaidGetAllUrl, offset, limit))
+                .uri(String.format(netMaidGetAllUrl))
                 .accept(MediaType.APPLICATION_JSON)
                 .headers(headers -> headers.addAll(reqHeaders))
                 .retrieve()

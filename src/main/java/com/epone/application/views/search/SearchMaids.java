@@ -1,6 +1,7 @@
 package com.epone.application.views.search;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import org.springframework.web.client.RestClient;
 
@@ -9,7 +10,6 @@ import com.epone.application.model.NetMaidAllData;
 import com.epone.application.repo.NetMaidCaller;
 import com.epone.application.views.MainLayout;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -18,39 +18,28 @@ import com.vaadin.flow.router.Route;
 public class SearchMaids extends EponePage {
     NetMaidCaller caller = new NetMaidCaller(RestClient.builder());
 
-    public SearchMaids() {  
+    public SearchMaids() {
         Grid<NetMaidAllData> grid = new Grid<>();
-        grid.setDataProvider(getDataProvider());
-        grid.addColumn(NetMaidAllData::getName);
-        grid.addColumn(NetMaidAllData::getNationality);
-        grid.addColumn(NetMaidAllData::getAvailability);
 
+        caller.SetCookie();
+        ArrayList<NetMaidAllData> allMaids = caller.GetNetMaidAllMaids().getData();
+        grid.setItems(allMaids);
+
+        grid.addColumn(NetMaidAllData::getCode).setHeader("Code")
+                .setComparator(Comparator.comparing(maid -> maid.getCode().trim().toLowerCase()));
+
+        grid.addColumn(NetMaidAllData::getName).setHeader("Name")
+                .setComparator(Comparator.comparing(maid -> maid.getName().trim().toLowerCase()));
+
+        grid.addColumn(NetMaidAllData::getNationality).setHeader("Nationality")
+                .setComparator(Comparator.comparing(maid -> maid.getNationality().trim().toLowerCase()));
+
+        grid.addColumn(NetMaidAllData::getX_age).setHeader("Age")
+                .setComparator(Comparator.comparing(maid -> maid.getX_age()));
+
+        grid.addColumn(NetMaidAllData::getMtype).setHeader("Type")
+                .setComparator(Comparator.comparing(maid -> maid.getMtype().trim().toLowerCase()));
 
         add(grid);
     }
-
-    private DataProvider<NetMaidAllData, Void> getDataProvider() {
-        caller.SetCookie();
-
-        DataProvider<NetMaidAllData, Void> dataProvider =
-         DataProvider.fromCallbacks(
-        // First callback fetches items based on a query
-        query -> {
-            // The index of the first item to load
-            int offset = query.getOffset();
-
-            // The number of items to load
-            int limit = query.getLimit();
-
-            ArrayList<NetMaidAllData> allMaids = caller.GetNetMaidAllMaids(offset, limit).getData();
-
-            return allMaids.stream();
-        },
-        // Second callback fetches the total number of items currently in the Grid.
-        // The grid can then use it to properly adjust the scrollbars.
-        query -> caller.GetNetMaidAllMaids(0,999).getTotalRows());
-
-        return dataProvider;
-    }
-
 }
