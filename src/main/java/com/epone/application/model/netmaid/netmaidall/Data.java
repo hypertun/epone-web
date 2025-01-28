@@ -1,6 +1,6 @@
-package com.epone.application.model;
+package com.epone.application.model.netmaid.netmaidall;
 
-public class NetMaidAllData {
+public class Data {
     public int id;
     public String code;
     public String name;

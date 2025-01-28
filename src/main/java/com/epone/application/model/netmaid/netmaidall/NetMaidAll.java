@@ -1,17 +1,17 @@
-package com.epone.application.model;
+package com.epone.application.model.netmaid.netmaidall;
 
 import java.util.ArrayList;
 
 public class NetMaidAll {
     public int status;
-    public ArrayList<NetMaidAllData> data;
+    public ArrayList<Data> data;
     public int totalRows;
 
     public int getStatus() {
         return status;
     }
 
-    public ArrayList<NetMaidAllData> getData() {
+    public ArrayList<Data> getData() {
         return data;
     }
 

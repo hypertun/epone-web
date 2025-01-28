@@ -7,7 +7,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
 
-import com.epone.application.model.NetMaidAll;
+import com.epone.application.model.netmaid.netmaidall.NetMaidAll;
+import com.epone.application.model.netmaid.netmaidedit.NetMaidEdit;
 
 public class NetMaidCaller {
 
@@ -16,7 +17,7 @@ public class NetMaidCaller {
     private static final String netMaidGetAllUrl = netMaidURL
             + "maids.json?xSearchStatus=ALL&xPublished=Y";
 
-    private static final String maidsEndpoint = "maids/";
+    private static final String maidEditEndpoint = netMaidURL + "maids/%d/edit.json";
 
     private static final String cookiesEndpoint = "users/sign_in";
 
@@ -72,4 +73,19 @@ public class NetMaidCaller {
         return resp.getBody();
     }
 
+
+    public NetMaidEdit GetNetMaidEdit(int maidID) {
+        HttpHeaders reqHeaders = new HttpHeaders();
+        reqHeaders.add("Cookie", netMaidCookie);
+
+        ResponseEntity<NetMaidEdit> resp = restClient
+                .get()
+                .uri(String.format(maidEditEndpoint, maidID))
+                .accept(MediaType.APPLICATION_JSON)
+                .headers(headers -> headers.addAll(reqHeaders))
+                .retrieve()
+                .toEntity(NetMaidEdit.class);
+
+        return resp.getBody();
+    }
 }
