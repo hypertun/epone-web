@@ -1,7 +1,11 @@
 package com.epone.application.views.search;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 import org.springframework.web.client.RestClient;
@@ -13,10 +17,14 @@ import com.epone.application.repo.NetMaidCaller;
 import com.epone.application.views.MainLayout;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.dataview.GridLazyDataView;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
@@ -35,7 +43,40 @@ public class SearchMaids extends EponePage {
                 ArrayList<Data> allMaids = caller.GetNetMaidAllMaids().getData();
                 grid.setDetailsVisibleOnClick(false);
 
-                GridListDataView<Data> searchMaidsView = grid.setItems(allMaids);
+                GridLazyDataView<Data> searchMaidsView = grid.setItems(
+                                q -> {
+                                        return allMaids.stream().skip(q.getOffset()).limit(q.getLimit());
+                                },
+                                q -> allMaids.size());
+
+                grid.addComponentColumn(maid -> {
+                        Image maidImage = new Image(caller.GetMaidPicture(maid.getId()).ImageP, "helper pic");
+                        String imageUrl = maidImage.getSrc();
+
+                        CompletableFuture.runAsync(() -> {
+                                try {
+                                        URL url = new URL(imageUrl);
+                                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                                        connection.setRequestMethod("HEAD");
+                                        int responseCode = connection.getResponseCode();
+
+                                        if (responseCode == HttpURLConnection.HTTP_OK) {
+                                                // Image URL is valid, apply blur
+                                                getUI().ifPresent(ui -> ui.access(() -> {
+                                                        maidImage.getStyle().set("filter", "blur(5px)");
+                                                        maidImage.getStyle().set("cursor", "pointer");
+
+                                                }));
+                                        }
+                                } catch (IOException e) {
+                                        // Handle error, e.g., log it
+                                        e.printStackTrace();
+                                }
+                        });
+
+                        return maidImage;
+                }).setHeader("Image")
+                                .setFlexGrow(0).setFrozen(true);
 
                 grid.addColumn(createToggleDetailsRenderer(grid)).setWidth("80px")
                                 .setFlexGrow(0).setFrozen(true);
@@ -55,6 +96,8 @@ public class SearchMaids extends EponePage {
                 grid.addColumn(Data::getMtype).setHeader("Type")
                                 .setComparator(Comparator.comparing(maid -> maid.getMtype().trim().toLowerCase()));
 
+                grid.setItemDetailsRenderer(createMaidDetailsRenderer());
+
                 TextField searchField = new TextField();
                 searchField.setWidth("30%");
                 searchField.setPlaceholder("Search");
@@ -62,18 +105,21 @@ public class SearchMaids extends EponePage {
                 searchField.setValueChangeMode(ValueChangeMode.EAGER);
                 searchField.addValueChangeListener(e -> searchMaidsView.refreshAll());
 
-                searchMaidsView.addFilter(maid -> {
-                        String searchTerm = searchField.getValue().trim();
+                // searchMaidsView.addFilter(maid -> {
+                // String searchTerm = searchField.getValue().trim();
 
-                        if (searchTerm.isEmpty())
-                                return true;
+                // if (searchTerm.isEmpty())
+                // return true;
 
-                        boolean matchesName = matches(maid.getName(),
-                                        searchTerm);
-                        boolean matchesCode = matches(maid.getCode(), searchTerm);
+                // boolean matchesName = matches(maid.getName(),
+                // searchTerm);
+                // boolean matchesCode = matches(maid.getCode(), searchTerm);
 
-                        return matchesName || matchesCode;
-                });
+                // return matchesName || matchesCode;
+                // });
+
+                grid.setHeight("700px");
+                grid.setWidthFull();
 
                 add(searchField, grid);
         }
@@ -105,28 +151,33 @@ public class SearchMaids extends EponePage {
                                                                 !grid.isDetailsVisible(maid)));
         }
 
+        private static ComponentRenderer<MaidDetailsFormLayout, Data> createMaidDetailsRenderer() {
+                return new ComponentRenderer<>(MaidDetailsFormLayout::new,
+                                MaidDetailsFormLayout::setMaid);
+        }
+
         private static class MaidDetailsFormLayout extends FormLayout {
                 private final TextField nationalityField = new TextField("Nationality");
                 private final TextField birthdateField = new TextField("Date Of Birth");
                 private final TextField siblingsField = new TextField("Siblings");
-                private final TextField heightField = new TextField("");
-                private final TextField weightField = new TextField("State");
-                private final TextField martialField = new TextField("State");
-                private final TextField childrenField = new TextField("State");
-                private final TextField eduField = new TextField("State");
-                private final TextField introField = new TextField("State");
-                //LanguageSkills
-                //Aptitudes
-                //OtherInformations
-                //WorkingExperiences
+                private final TextField heightField = new TextField("Height");
+                private final TextField weightField = new TextField("Weight");
+                private final TextField martialField = new TextField("Martial Status");
+                private final TextField childrenField = new TextField("No. Of Children");
+                private final TextField eduField = new TextField("Education");
+                private final Paragraph introField = new Paragraph();
+                // LanguageSkills
+                // Aptitudes
+                // OtherInformations
+                // WorkingExperiences
 
                 public MaidDetailsFormLayout() {
                         Stream.of(nationalityField, birthdateField, siblingsField, heightField, weightField,
-                         martialField, childrenField, eduField,
-                          introField).forEach(field -> {
+                                        martialField, childrenField, eduField).forEach(field -> {
                                                 field.setReadOnly(true);
                                                 add(field);
                                         });
+                        add(introField);
 
                         setResponsiveSteps(new ResponsiveStep("0", 3));
                         setColspan(nationalityField, 3);
@@ -142,15 +193,52 @@ public class SearchMaids extends EponePage {
 
                 public void setMaid(Data maid) {
                         final NetMaidEdit maidData = caller.GetNetMaidEdit(maid.getId());
+
                         nationalityField.setValue(maid.getNationality());
                         birthdateField.setValue(maidData.getBirthdate());
                         siblingsField.setValue(maidData.getSiblings());
                         heightField.setValue(String.valueOf(maidData.getHeight()));
                         weightField.setValue(String.valueOf(maidData.getWeight()));
-                        martialField.setValue(maidData.getMarital());
+
+                        switch (maidData.getMarital()) {
+                                case "20":
+                                        martialField.setValue("Married");
+                                        break;
+                                case "30":
+                                        martialField.setValue("Widowed");
+                                        break;
+                                case "40":
+                                        martialField.setValue("Divorced");
+                                        break;
+                                case "50":
+                                        martialField.setValue("Separated");
+                                        break;
+                                case "60":
+                                        martialField.setValue("Single Parent");
+                                        break;
+                                default:
+                                        martialField.setValue("Single");
+                                        break;
+                        }
+
                         childrenField.setValue(String.valueOf(maidData.getChildren()));
-                        eduField.setValue(maidData.getEdu_level());
-                        introField.setValue(maidData.getIntroduction());
+
+                        switch (maidData.getEdu_level()) {
+                                case "10":
+                                        eduField.setValue("Secondary");
+                                        break;
+                                case "30":
+                                        eduField.setValue("High School");
+                                        break;
+                                case "40":
+                                        eduField.setValue("College/Degree");
+                                        break;
+                                default:
+                                        eduField.setValue("Others");
+                                        break;
+                        }
+
+                        introField.getElement().setProperty("innerHTML", maidData.getIntroduction());
                 }
         }
 }

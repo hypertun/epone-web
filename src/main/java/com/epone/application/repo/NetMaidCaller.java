@@ -9,6 +9,7 @@ import org.springframework.web.client.RestClient;
 
 import com.epone.application.model.netmaid.netmaidall.NetMaidAll;
 import com.epone.application.model.netmaid.netmaidedit.NetMaidEdit;
+import com.epone.application.model.netmaid.netmaidpic.Picture;
 
 public class NetMaidCaller {
 
@@ -21,11 +22,11 @@ public class NetMaidCaller {
 
     private static final String cookiesEndpoint = "users/sign_in";
 
+    private static final String pictureEndpoint = netMaidURL + "maids/%d/crop_pp";
+
     private static final String netMaidCookieName = "remember_user_token";
 
-    // temp
     private static final String netMaidUser = "slfgreen50@gmail.com";
-    private static final String netMaidPass = "GreenEP1";
 
     private final RestClient restClient;
 
@@ -38,7 +39,7 @@ public class NetMaidCaller {
     public void SetCookie() {
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
         body.add("user[login]", netMaidUser);
-        body.add("user[password]", netMaidPass);
+        body.add("user[password]", NetMaidConfig.netMaidPass);
         body.add("commit", "Log In");
         body.add("user[remember_me]", "1");
 
@@ -88,4 +89,26 @@ public class NetMaidCaller {
 
         return resp.getBody();
     }
+
+    public Picture GetMaidPicture(int maidID) {
+        HttpHeaders reqHeaders = new HttpHeaders();
+        reqHeaders.add("Cookie", netMaidCookie);
+
+        String resp = restClient
+                .get()
+                .uri(String.format(pictureEndpoint, maidID))
+                .accept(MediaType.TEXT_HTML)
+                .headers(headers -> headers.addAll(reqHeaders))
+                .retrieve()
+                .body(String.class);
+
+        int urlIndexStart = resp.lastIndexOf("<img src=\"");
+        int urlIndexEnd = resp.substring(urlIndexStart+10).indexOf("\"");
+        String pictureF = "https:" + resp.substring(urlIndexStart+10,urlIndexEnd+urlIndexStart+10);
+
+        Picture ret = new Picture(pictureF,pictureF.replaceAll("f","p"));
+
+        return ret;
+    }
+    
 }
