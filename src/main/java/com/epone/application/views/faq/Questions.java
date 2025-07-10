@@ -105,7 +105,7 @@ public class Questions extends Accordion {
         qna.put("What to do when maid gets pregnant?",
                 """
                                             You might have heard of cases of MDWs getting pregnant. If you notice signs like \
-                                            fatigue, nausea, vomiting, missed periods, or sudden weight gain in your helper, it i \s
+                                            fatigue, nausea, vomiting, missed periods, or sudden weight gain in your helper, it is \
                                             best to have an open conversation with your helper. If she confirms that she is \
                                             pregnant or if you strongly suspect it based on the signs, suggest that she goes for a \
                                             proper pregnancy test at a clinic. This will give you both clarity on the situation. If the \

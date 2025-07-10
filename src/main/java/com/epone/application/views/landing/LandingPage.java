@@ -65,12 +65,7 @@ public class LandingPage extends EponePage {
                         "and it is not always a one-size-fits-all.  Therefore, we provide you with a replacement helper "
                         +
                         "within a period of 6 months, starting from the commencement of your hire of the very first " +
-                        "helper. If you are not happy, we are not happy as well. We understand your needs may change over time "
-                        +
-                        "and it is not always a one-size-fits-all.  Therefore, we provide you with a replacement helper "
-                        +
-                        "within a period of 6 months, starting from the commencement of your hire of the very first " +
-                        "helper.";
+                        "helper. ";
 
         private final String transfersStatement = "<span style=\"color:green\">Transfers</span>";
         private final String transfersString = "If you need to transfer your helper to another employer, we can also assist you as well. The terms "

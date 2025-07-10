@@ -32,8 +32,8 @@ public class Training extends EponePage {
             ones receive top-notch care.
             <br>
             <br>
-            In Singapore, we understand the challenges of balancing daily work life while caring for their\
-            elderly family members. EP One Manpower equips our maids with specialized training for senior\
+            In Singapore, we understand the challenges of balancing daily work life while caring for their \
+            elderly family members. EP One Manpower equips our maids with specialized training for senior \
             care.
             <br>
             <br>

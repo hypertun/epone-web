@@ -83,7 +83,7 @@ public class MainLayout extends AppLayout {
         whatsappImage.setHeight("50px");
 
         // Construct the WhatsApp link with your desired phone number and message
-        String phoneNumber = "+6587216855"; // Replace with the actual phone number
+        String phoneNumber = "+6589006441"; // Replace with the actual phone number
         String message = "Hello! I'm interested in a helper!"; // Replace with your message
         String whatsappLink = "https://wa.me/" + phoneNumber + "?text=" + message;
 

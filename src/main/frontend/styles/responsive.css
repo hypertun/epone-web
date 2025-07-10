@@ -1,0 +1,74 @@
+/* Base responsive styles */
+html {
+    font-size: 16px;
+}
+
+/* Container sizes */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Responsively hide elements */
+@media (min-width: 768px) {
+    .hide-on-desktop {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .show-on-desktop {
+        display: none !important;
+    }
+    
+    /* Adjust font sizes for mobile */
+    h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Adjust padding for mobile */
+    .mobile-padding {
+        padding: 1rem !important;
+    }
+    
+    /* Make horizontal layouts vertical on mobile */
+    .mobile-stack {
+        flex-direction: column !important;
+    }
+    
+    /* Adjust images for mobile */
+    .mobile-full-width {
+        width: 100% !important;
+    }
+}
+
+/* Custom components */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    padding: 1rem;
+    background-color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Animated elements */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
