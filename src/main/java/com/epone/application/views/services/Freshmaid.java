@@ -22,8 +22,8 @@ public class Freshmaid extends EponePage {
 
     public Freshmaid() {
         add(GetH2Heading(heading),
-                GetImage("images/freshmaid.png", "fresh maid image"),
-                GetParagraph(bodyStm1),GetParagraph(bodyStm2), GetParagraph(bodyStm3));
+        createCard(GetImage("images/freshmaid.png", "fresh maid image"),
+                GetParagraph(bodyStm1),GetParagraph(bodyStm2), GetParagraph(bodyStm3)));
         setPadding(true);
         getThemeList().add("spacing-l");
         getStyle().set("padding-left", "5%").set("padding-right", "5%");

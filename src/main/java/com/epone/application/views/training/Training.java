@@ -60,8 +60,15 @@ public class Training extends EponePage {
 
         Image housekeeping = GetImage("images/housekeeping.png", "housekeeping image");
 
-        addAndExpand(new HorizontalLayout(infantImage, GetHeaderBodyCardWithSpacing(GetH2Heading(infantHeader), GetParagraph(infantBody))),
-                new HorizontalLayout(GetHeaderBodyCardWithSpacing(GetH2Heading(elderHeader), GetParagraph(elderBody)), elderImage),
-                new HorizontalLayout(housekeeping, GetHeaderBodyCardWithSpacing(GetH2Heading(houseHeader), GetParagraph(houseBody))));
+        addAndExpand(
+                createCard(new HorizontalLayout(
+                        infantImage,
+                        GetHeaderBodyCardWithSpacing(GetH2Heading(infantHeader), GetParagraph(infantBody)))),
+                createCard(new HorizontalLayout(
+                        GetHeaderBodyCardWithSpacing(GetH2Heading(elderHeader), GetParagraph(elderBody)),
+                        elderImage)),
+                createCard(new HorizontalLayout(
+                        housekeeping,
+                        GetHeaderBodyCardWithSpacing(GetH2Heading(houseHeader), GetParagraph(houseBody)))));
     }
 }

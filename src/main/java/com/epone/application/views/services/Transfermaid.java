@@ -29,8 +29,8 @@ public class Transfermaid extends EponePage {
 
     public Transfermaid() {
         add(GetH2Heading(heading),
-                GetImage("images/transfermaid.png", "tranfer maid image"),
-                GetParagraph(bodyStm1),GetParagraph(bodyStm2), GetParagraph(bodyStm3));
+        createCard(GetImage("images/transfermaid.png", "tranfer maid image"),
+                GetParagraph(bodyStm1),GetParagraph(bodyStm2), GetParagraph(bodyStm3)));
         setPadding(true);
         getThemeList().add("spacing-l");
         getStyle().set("padding-left", "5%").set("padding-right", "5%");

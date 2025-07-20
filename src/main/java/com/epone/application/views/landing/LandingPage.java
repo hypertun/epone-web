@@ -103,7 +103,9 @@ public class LandingPage extends EponePage {
                 adsHori.setAlignItems(FlexComponent.Alignment.CENTER);
                 adsHori.getStyle().set("border", "none").set("padding-top", "10%");
 
-                VerticalLayout ourServices = new VerticalLayout(GetH2Heading(ourServicesStatement), ourServicesPara);
+                VerticalLayout ourServices = createCard(
+                                GetH2Heading(ourServicesStatement),
+                                ourServicesPara);
                 ourServices.setAlignItems(FlexComponent.Alignment.CENTER);
 
                 IFrame googleReviews = new IFrame("https://cb8234035643410dbfe274a473e5bff9.elf.site");
@@ -114,7 +116,8 @@ public class LandingPage extends EponePage {
                 Image medals = GetImage("images/medals.png", "medals image");
                 medals.setWidth("70%");
 
-                add(titleBlock, adsHori, googleReviews, ourServices, getServices(), medals);
+                VerticalLayout servicesCard = createCard(getServices());
+                add(titleBlock, adsHori, googleReviews, ourServices, servicesCard, medals);
                 setPadding(true);
                 getThemeList().add("spacing-l");
                 getStyle().set("padding-left", "5%").set("padding-right", "5%");

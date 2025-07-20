@@ -38,8 +38,17 @@ public class MainLayout extends AppLayout {
         Image sCompanyLogo = new Image("images/small-logo.png", "sCompanyLogo");
         sCompanyLogo.setHeight("100px");
         sCompanyLogo.getStyle().set("padding-right", "5%");
+        sCompanyLogo.getStyle()
+                .set("transition", "transform 0.3s ease")
+                .set("cursor", "pointer");
+        sCompanyLogo.getElement().executeJs(
+                "this.addEventListener('mouseenter', function() { this.style.transform = 'scale(1.05)'; });" +
+                        "this.addEventListener('mouseleave', function() { this.style.transform = 'scale(1)'; });");
 
         MenuBar menuBar = new MenuBar();
+        menuBar.getStyle()
+                .set("font-weight", "500")
+                .set("font-size", "16px");
         menuBar.setOpenOnHover(true);
 
         HorizontalLayout navigation = new HorizontalLayout();

@@ -1,5 +1,47 @@
 @import url('./main-layout.css');
 
+:root {
+  --primary-color: #2E7D32;
+  --secondary-color: #4CAF50;
+  --accent-color: #FF9800;
+  --background-light: #F5F7FA;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--background-light);
+}
+
+.card {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  background-color: white;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+vaadin-button {
+  border-radius: var(--border-radius) !important;
+  transition: var(--transition) !important;
+}
+
 vaadin-app-layout::part(navbar) {
     border-bottom: 1px solid var(--lumo-contrast-10pct);
     min-height: unset;

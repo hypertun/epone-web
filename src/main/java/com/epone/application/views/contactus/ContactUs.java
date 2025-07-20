@@ -1,5 +1,6 @@
 package com.epone.application.views.contactus;
 
+import com.epone.application.EponePage;
 import com.epone.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
@@ -26,7 +27,7 @@ import org.apache.commons.mail.SimpleEmail;
 
 @PageTitle("Contact Us")
 @Route(value = "contact", layout = MainLayout.class)
-public class ContactUs extends VerticalLayout {
+public class ContactUs extends EponePage {
 
     private static final String contactUsHeader = "<span>Contact Us!</span> <span style=\"color:green\"> We Want To Help!</span>";
     public static final String Office1HTML = "<span>170, Upper Bukit Timah Road, #03-09<br>Bukit Timah Shopping Centre<br>Singapore 588179</span>";
@@ -100,8 +101,14 @@ public class ContactUs extends VerticalLayout {
 
         formLayout.add(nameField, mobileField, emailField, nationalityBox, skillSetGroup, messageField);
         formLayout.setColspan(messageField, 2);
-        formSendLayout.add(header, informationLayout, description, formLayout, sendButton);
-        add(formSendLayout);
+        VerticalLayout formCard = createCard(
+                header,
+                informationLayout,
+                description,
+                formLayout,
+                sendButton);
+        formCard.setAlignItems(FlexComponent.Alignment.CENTER);
+        add(formCard);
         getStyle().set("padding-left", "5%").set("padding-right", "5%");
     }
 
@@ -144,7 +151,7 @@ public class ContactUs extends VerticalLayout {
                 + "Nationality: " + nationality + "\n" + "Skill Set: " + skillSet + "\n"
                 + "\n\n"
                 + "Message:\n" + message);
-        simpleEmail.addTo("sm19@epone.com.sg","bt39@epone.com.sg","hg25@epone.com.sg");
+        simpleEmail.addTo("sm19@epone.com.sg", "bt39@epone.com.sg", "hg25@epone.com.sg");
         simpleEmail.send();
     }
 
@@ -163,7 +170,7 @@ public class ContactUs extends VerticalLayout {
         HorizontalLayout office2Email = getPin("email", office2EmailHTML);
         HorizontalLayout office3Email = getPin("email", office3EmailHTML);
 
-        VerticalLayout pinLayout1 = new VerticalLayout(office1,office2,office3);
+        VerticalLayout pinLayout1 = new VerticalLayout(office1, office2, office3);
         VerticalLayout pinLayout2 = new VerticalLayout(office1Phone, office2Phone, office3Phone);
         VerticalLayout pinLayout3 = new VerticalLayout(office1Email, office2Email, office3Email);
         pinLayout1.setJustifyContentMode(FlexComponent.JustifyContentMode.EVENLY);

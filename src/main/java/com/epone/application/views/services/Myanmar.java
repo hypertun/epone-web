@@ -30,7 +30,7 @@ public class Myanmar extends EponePage {
         indoImage.setHeight("800px");
         indoImage.setWidth("800px");
 
-        add(GetH2Heading(header), GetParagraph(body), indoImage);
+        add(GetH2Heading(header), createCard(GetParagraph(body), indoImage));
         setPadding(true);
         getThemeList().add("spacing-l");
         getStyle().set("padding-left", "5%").set("padding-right", "5%");

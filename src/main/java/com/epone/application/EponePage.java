@@ -65,8 +65,17 @@ public class EponePage extends VerticalLayout {
 
     public Image GetImage(String imageLoc, String imageName) {
         Image im = new Image(imageLoc, imageName);
-        im.setHeight("300px");
-        im.setWidth("300px");
+        im.getStyle()
+          .set("border-radius", "8px")
+          .set("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.1)");
         return im;
+    }
+
+    public VerticalLayout createCard(Component... components) {
+        VerticalLayout card = new VerticalLayout(components);
+        card.addClassName("card");
+        card.setPadding(true);
+        card.setSpacing(true);
+        return card;
     }
 }

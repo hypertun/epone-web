@@ -18,8 +18,8 @@ public class Directhiremaid extends EponePage {
 
     public Directhiremaid() {
         add(GetH2Heading(heading),
-                GetImage("images/directhiremaid.png", "direct hire image"),
-                GetParagraph(bodyStm1));
+        createCard( GetImage("images/directhiremaid.png", "direct hire image"),
+                GetParagraph(bodyStm1)));
         setPadding(true);
         getThemeList().add("spacing-l");
         getStyle().set("padding-left", "5%").set("padding-right", "5%");
